@@ -1,0 +1,56 @@
+
+class AppConstants {
+  static const String appName = '12connect';
+  static const String appVersion = '1.0';
+  static const String baseUrl = 'https://6valley.6amtech.com';
+  static const String userId = 'userId';
+  static const String name = 'name';
+
+  static const String registrationUri = '/api/v1/auth/register';
+  static const String loginUri = '/api/v1/auth/login';
+
+  static const String configUri = '/api/v1/config';
+
+  static const String forgetPasswordUri = '/api/v1/auth/forgot-password';
+
+  static const String checkPhoneUri = '/api/v1/auth/check-phone';
+  static const String resendPhoneOtpUri = '/api/v1/auth/resend-otp-check-phone';
+  static const String verifyPhoneUri = '/api/v1/auth/verify-phone';
+  static const String socialLoginUri = '/api/v1/auth/social-login';
+  static const String checkEmailUri = '/api/v1/auth/check-email';
+  static const String resendEmailOtpUri = '/api/v1/auth/resend-otp-check-email';
+  static const String verifyEmailUri = '/api/v1/auth/verify-email';
+  static const String resetPasswordUri = '/api/v1/auth/reset-password';
+  static const String verifyOtpUri = '/api/v1/auth/verify-otp';
+
+  // sharePreference
+  static const String token = 'token';
+  static const String user = 'user';
+  static const String userEmail = 'user_email';
+  static const String userPassword = 'user_password';
+  static const String homeAddress = 'home_address';
+  static const String searchAddress = 'search_address';
+  static const String officeAddress = 'office_address';
+  static const String cartList = 'cart_list';
+  static const String config = 'config';
+  static const String guestMode = 'guest_mode';
+  static const String currency = 'currency';
+  static const String langKey = 'lang';
+  static const String intro = 'intro';
+
+  // order status
+  static const String pending = 'pending';
+  static const String confirmed = 'confirmed';
+  static const String processing = 'processing';
+  static const String processed = 'processed';
+  static const String delivered = 'delivered';
+  static const String failed = 'failed';
+  static const String returned = 'returned';
+  static const String cancelled = 'canceled';
+  static const String outForDelivery = 'out_for_delivery';
+  static const String countryCode = 'country_code';
+  static const String languageCode = 'language_code';
+  static const String theme = 'theme';
+  static const String topic = 'i2connect';
+  static const String userAddress = 'user_address';
+}

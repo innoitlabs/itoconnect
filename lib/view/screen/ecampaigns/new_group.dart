@@ -33,6 +33,7 @@ class _NewGroupViewState extends State<NewGroupView> {
             const SizedBox(height: 10.0),
             CustomTextField(
               hintText: 'Enter Description',
+              maxLine: 6,
             ),
             const SizedBox(height: 20.0),
             CustomTextField(

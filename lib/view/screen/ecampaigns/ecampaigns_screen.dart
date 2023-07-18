@@ -7,6 +7,7 @@ import 'package:i2connect/util/images.dart';
 import 'package:i2connect/view/basewidget/button/custom_button.dart';
 import 'package:i2connect/view/basewidget/textfield/custom_password_textfield.dart';
 import 'package:i2connect/view/basewidget/textfield/custom_textfield.dart';
+import 'package:i2connect/view/screen/ecampaigns/compose_view.dart';
 import 'package:i2connect/view/screen/ecampaigns/new_group.dart';
 import 'package:provider/provider.dart';
 import 'package:i2connect/view/basewidget/custom_app_bar.dart';
@@ -84,45 +85,55 @@ class ECampaignsScreenState extends State<ECampaignsScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(16.0),
-                                decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-                                child:  Image.asset('assets/images/whatsapp.png'),
-                              ),
-                              const SizedBox(height: 6.0),
-                              const Text(
-                                'WhatsApp',
-                                style: TextStyle(
-                                  color: Colors.black87,
-                                  fontFamily: "ProximaNova",
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
+                          GestureDetector(
+                            onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => ComposeView(composeType: 'WhatsApp')));
+                      },
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(16.0),
+                                  decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+                                  child:  Image.asset('assets/images/whatsapp.png'),
                                 ),
-                              )
-                            ],
+                                const SizedBox(height: 6.0),
+                                const Text(
+                                  'WhatsApp',
+                                  style: TextStyle(
+                                    color: Colors.black87,
+                                    fontFamily: "ProximaNova",
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(16.0),
-                                decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-                                child: Image.asset('assets/images/textsms.png'),
-                              ),
-                              const SizedBox(height: 6.0),
-                              const Text(
-                                'SMS',
-                                style: TextStyle(
-                                  color: Colors.black87,
-                                  fontFamily: "ProximaNova",
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => ComposeView(composeType: 'SMS')));
+                            },
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(16.0),
+                                  decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+                                  child: Image.asset('assets/images/textsms.png'),
                                 ),
-                              )
-                            ],
+                                const SizedBox(height: 6.0),
+                                const Text(
+                                  'SMS',
+                                  style: TextStyle(
+                                    color: Colors.black87,
+                                    fontFamily: "ProximaNova",
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                )
+                              ],
+                            ),
                           )
                         ],),
                       );

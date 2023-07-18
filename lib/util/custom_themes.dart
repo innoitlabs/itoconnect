@@ -56,6 +56,25 @@ const textFieldHeader = TextStyle(
   fontSize: Dimensions.fontSizeLarge,
   color: Colors.black87,
 );
+const textFieldItalic = TextStyle(
+  fontFamily: 'ProximaNova',
+  fontWeight: FontWeight.w600,
+  fontStyle: FontStyle.italic,
+  fontSize: Dimensions.fontSizeSmall,
+  color: Color(0xFF8B93A5),
+);
+const textFieldSubHeader = TextStyle(
+  fontFamily: 'ProximaNova',
+  fontWeight: FontWeight.w600,
+  fontSize: Dimensions.paddingSizeDefault,
+  color: Colors.black87,
+);
+const actionButtonStyle = TextStyle(
+  fontFamily: 'ProximaNova',
+  fontWeight: FontWeight.w600,
+  fontSize: Dimensions.homePagePadding,
+  color: Colors.white,
+);
 const titleCardHeader = TextStyle(
   fontFamily: 'ProximaNova',
   fontWeight: FontWeight.w600,

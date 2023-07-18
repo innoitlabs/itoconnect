@@ -15,12 +15,12 @@ class GroupsView extends StatelessWidget {
         width: double.infinity,
         child: Padding(
           padding: const EdgeInsets.only(top: 14.0, left: 14.0, right: 14.0),
-          child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 14.0, mainAxisSpacing: 14.0),
+          child: GridView.builder(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 14.0, mainAxisSpacing: 14.0),
               itemCount: 20,
               itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                 showModalBottomSheet(context: context, shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20.0))
+                 showModalBottomSheet(context: context, shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20.0))
                  ), builder: (context) => Container());
               },
               child: Container(

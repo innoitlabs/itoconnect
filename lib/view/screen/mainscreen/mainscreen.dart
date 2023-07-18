@@ -89,7 +89,7 @@ class _MainScreenViewState extends State<MainScreenView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF0F0F0),
+      // backgroundColor: const Color(0xFFF0F0F0),
       // appBar: AppBar(
       //   leading: const Icon(Icons.menu, color: Colors.black87,),
       //   backgroundColor: const Color(0xFFF0F0F0),

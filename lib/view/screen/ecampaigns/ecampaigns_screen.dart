@@ -7,6 +7,7 @@ import 'package:i2connect/util/images.dart';
 import 'package:i2connect/view/basewidget/button/custom_button.dart';
 import 'package:i2connect/view/basewidget/textfield/custom_password_textfield.dart';
 import 'package:i2connect/view/basewidget/textfield/custom_textfield.dart';
+import 'package:i2connect/view/screen/ecampaigns/new_group.dart';
 import 'package:provider/provider.dart';
 import 'package:i2connect/view/basewidget/custom_app_bar.dart';
 
@@ -96,35 +97,45 @@ class ECampaignsScreenState extends State<ECampaignsScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 14.0),
-                    decoration: BoxDecoration(
-                        color: const Color(0xFF1C477A),
-                        borderRadius: BorderRadius.circular(2.0)),
-                    child: const Text(
-                      'Groups',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: "ProximaNova",
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                  GestureDetector(
+                    onTap: () {
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) => const NewGroupView()));
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 14.0),
+                      decoration: BoxDecoration(
+                          color: const Color(0xFF1C477A),
+                          borderRadius: BorderRadius.circular(2.0)),
+                      child: const Text(
+                        'Groups',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "ProximaNova",
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 14.0),
-                    decoration: BoxDecoration(
-                        color: const Color(0xFF1C477A),
-                        borderRadius: BorderRadius.circular(2.0)),
-                    child: const Text(
-                      '+ New Group',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: "ProximaNova",
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const NewGroupView()));
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 14.0),
+                      decoration: BoxDecoration(
+                          color: const Color(0xFF1C477A),
+                          borderRadius: BorderRadius.circular(2.0)),
+                      child: const Text(
+                        '+ New Group',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "ProximaNova",
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),

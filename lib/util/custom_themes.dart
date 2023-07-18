@@ -50,6 +50,12 @@ const titleHeader = TextStyle(
   fontSize: Dimensions.fontSizeOverLarge,
   color: Color(0xFF1455AC),
 );
+const textFieldHeader = TextStyle(
+  fontFamily: 'ProximaNova',
+  fontWeight: FontWeight.w700,
+  fontSize: Dimensions.fontSizeLarge,
+  color: Colors.black87,
+);
 const titleCardHeader = TextStyle(
   fontFamily: 'ProximaNova',
   fontWeight: FontWeight.w600,

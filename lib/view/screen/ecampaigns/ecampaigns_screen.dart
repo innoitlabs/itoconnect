@@ -18,9 +18,7 @@ class ECampaignsScreen extends StatefulWidget {
 }
 
 class ECampaignsScreenState extends State<ECampaignsScreen> {
-  TextEditingController? _emailController;
-  TextEditingController? _passwordController;
-  GlobalKey<FormState>? _formKeyLogin;
+  final dropDownTextController = TextEditingController();
 
   @override
   void initState() {
@@ -35,19 +33,176 @@ class ECampaignsScreenState extends State<ECampaignsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              SafeArea(
-                  child: CustomAppBar(title: "E-Campaigns",),
+      appBar: AppBar(),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 14.0),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    height: 40.0,
+                    width: double.infinity,
+                    child: TextField(
+                      controller: dropDownTextController,
+                      readOnly: true,
+                      decoration: const InputDecoration(
+                        hintText: 'Caste/Vote Favour',
+                        hintStyle: TextStyle(
+                          color: Color(0xFFAEAEAE),
+                          fontFamily: "ProximaNova",
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        contentPadding:
+                            EdgeInsets.only(top: 0.0, left: 14.0, bottom: 10.0),
+                        suffix: Icon(Icons.arrow_drop_down),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFF0047B2),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFF0047B2),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-              const SizedBox(height: 20),
-            ],
-          ),
-        ],
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: 30.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 10.0, horizontal: 20.0),
+                  decoration: BoxDecoration(
+                      color: const Color(0xFF528BB8),
+                      borderRadius: BorderRadius.circular(2.0)),
+                  child: const Text(
+                    'Filter',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "ProximaNova",
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 14.0),
+                    decoration: BoxDecoration(
+                        color: const Color(0xFF1C477A),
+                        borderRadius: BorderRadius.circular(2.0)),
+                    child: const Text(
+                      'Groups',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: "ProximaNova",
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 14.0),
+                    decoration: BoxDecoration(
+                        color: const Color(0xFF1C477A),
+                        borderRadius: BorderRadius.circular(2.0)),
+                    child: const Text(
+                      '+ New Group',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: "ProximaNova",
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 14.0),
+              color: const Color(0xFFB3C8E8),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Voter IDs',
+                    style: TextStyle(
+                      color: Color(0xFF0047B2),
+                      fontFamily: "ProximaNova",
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Icon(Icons.more_vert)
+                ],
+              ),
+            ),
+            Expanded(
+              child: Container(
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          offset: Offset(2.0, 2.0),
+                          color: Colors.black12,
+                          blurRadius: 10.0)
+                    ]),
+                child: ListView.builder(
+                    itemCount: 20,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                            top: 8.0, bottom: 8.0, left: 14.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'SGE1498963',
+                                  style: TextStyle(
+                                    color: Color(0xFF046A38),
+                                    fontFamily: "ProximaNova",
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Text(
+                                  'Anil Bandaru, Male, Reddy',
+                                  style: TextStyle(
+                                    color: Color(0xFF263659),
+                                    fontFamily: "ProximaNova",
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Checkbox(value: true, onChanged: (v) {})
+                          ],
+                        ),
+                      );
+                    }),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
-
 }

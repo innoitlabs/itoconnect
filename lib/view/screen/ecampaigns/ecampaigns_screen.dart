@@ -8,6 +8,7 @@ import 'package:i2connect/view/basewidget/button/custom_button.dart';
 import 'package:i2connect/view/basewidget/textfield/custom_password_textfield.dart';
 import 'package:i2connect/view/basewidget/textfield/custom_textfield.dart';
 import 'package:i2connect/view/screen/ecampaigns/compose_view.dart';
+import 'package:i2connect/view/screen/ecampaigns/groups_view.dart';
 import 'package:i2connect/view/screen/ecampaigns/new_group.dart';
 import 'package:provider/provider.dart';
 import 'package:i2connect/view/basewidget/custom_app_bar.dart';
@@ -166,7 +167,7 @@ class ECampaignsScreenState extends State<ECampaignsScreen> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) => const NewGroupView()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const GroupsView()));
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(

@@ -33,7 +33,7 @@ class ECampaignsScreenState extends State<ECampaignsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 14.0),
         child: Column(

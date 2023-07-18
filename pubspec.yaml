@@ -59,9 +59,6 @@ dependencies:
   pin_code_fields: ^7.0.0
   flutter_typeahead: ^4.0.0
   marquee: ^2.2.1
-  flutter_rating_bar: ^4.0.0
-  flutter_widget_from_html: ^0.8.5
-  flutter_widget_from_html_core: ^0.8.5+3
   flutter_html_table: ^3.0.0-alpha.3
   fluttertoast: ^8.0.9
   # permission_handler: ^10.0.0

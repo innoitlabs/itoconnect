@@ -7,6 +7,7 @@ import 'package:i2connect/util/images.dart';
 import 'package:i2connect/view/basewidget/button/custom_button.dart';
 import 'package:i2connect/view/basewidget/textfield/custom_password_textfield.dart';
 import 'package:i2connect/view/basewidget/textfield/custom_textfield.dart';
+import 'package:i2connect/view/screen/mainscreen/mainscreen.dart';
 import 'package:provider/provider.dart';
 import 'forgot_password.dart';
 import 'sign_up.dart';
@@ -115,7 +116,7 @@ class SignInScreenState extends State<SignInScreen> {
                           onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) => const DashboardScreen())),
+                                  builder: (_) => const MainScreenView())),
                         ),
                       ),
                       Container(

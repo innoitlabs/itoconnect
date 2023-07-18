@@ -96,11 +96,11 @@ class CalendarScreenState extends State<CalendarScreen> {
         children: [
           Column(
             children: [
-              SafeArea(
-                child: CustomAppBar(
-                  title: "Calendar",
-                ),
-              ),
+              // SafeArea(
+              //   child: CustomAppBar(
+              //     title: "Calendar",
+              //   ),
+              // ),
               TableCalendar<Event>(
                 firstDay: kFirstDay,
                 lastDay: kLastDay,

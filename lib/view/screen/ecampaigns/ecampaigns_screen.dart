@@ -73,20 +73,76 @@ class ECampaignsScreenState extends State<ECampaignsScreen> {
                     ),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(left: 30.0),
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 20.0),
-                  decoration: BoxDecoration(
-                      color: const Color(0xFF528BB8),
-                      borderRadius: BorderRadius.circular(2.0)),
-                  child: const Text(
-                    'Filter',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: "ProximaNova",
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
+                GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(context: context,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) {
+                      return Container(
+                        padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+                        decoration: const BoxDecoration(color: Color(0xFFADD8C3), borderRadius: BorderRadius.vertical(top: Radius.circular(20.0))),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(16.0),
+                                decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+                                child:  Image.asset('assets/images/whatsapp.png'),
+                              ),
+                              const SizedBox(height: 6.0),
+                              const Text(
+                                'WhatsApp',
+                                style: TextStyle(
+                                  color: Colors.black87,
+                                  fontFamily: "ProximaNova",
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              )
+                            ],
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(16.0),
+                                decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+                                child: Image.asset('assets/images/textsms.png'),
+                              ),
+                              const SizedBox(height: 6.0),
+                              const Text(
+                                'SMS',
+                                style: TextStyle(
+                                  color: Colors.black87,
+                                  fontFamily: "ProximaNova",
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              )
+                            ],
+                          )
+                        ],),
+                      );
+                    });
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 30.0),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 20.0),
+                    decoration: BoxDecoration(
+                        color: const Color(0xFF528BB8),
+                        borderRadius: BorderRadius.circular(2.0)),
+                    child: const Text(
+                      'Filter',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: "ProximaNova",
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),
@@ -174,6 +230,7 @@ class ECampaignsScreenState extends State<ECampaignsScreen> {
                     ]),
                 child: ListView.builder(
                     itemCount: 20,
+                    padding: const EdgeInsets.all(0.0),
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.only(

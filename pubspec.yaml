@@ -65,7 +65,7 @@ dependencies:
   flutter_html_table: ^3.0.0-alpha.3
   fluttertoast: ^8.0.9
   permission_handler: ^10.0.0
-  flutter_downloader: ^1.8.0+1
+#  flutter_downloader: ^1.8.0+1
   country_currency_pickers: ^2.0.0
   dropdown_search: ^5.0.3
   flutter_inappwebview: ^5.7.2+3

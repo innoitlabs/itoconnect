@@ -15,7 +15,7 @@ import 'di_container.dart' as di;
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-Future<void> main() async {
+void main() async {
   // HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
   // await FlutterDownloader.initialize(debug: true, ignoreSsl: true);

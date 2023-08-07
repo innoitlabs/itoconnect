@@ -16,23 +16,18 @@ import 'di_container.dart' as di;
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
-  // HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
-  // await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
   await di.init();
 
   runApp(MultiProvider(
     providers: [
-      // ChangeNotifierProvider(create: (context) => di.sl<AuthProvider>()),
-      // ChangeNotifierProvider(create: (context) => di.sl<SplashProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<ThemeProvider>()),
     ],
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 
 class MyApp extends StatelessWidget {
-  //const MyApp({super.key});
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.

@@ -1,0 +1,10 @@
+part of 'auth_cubit.dart';
+
+class AuthState extends Equatable {
+  const AuthState();
+
+  @override
+  List<Object> get props => [];
+
+  factory AuthState.initial() => const AuthState();
+}

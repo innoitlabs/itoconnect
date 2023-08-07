@@ -37,6 +37,13 @@ const constituencyCardTextLarge = TextStyle(
   color: Colors.white,
 );
 
+const addPictureTextStyle = TextStyle(
+  fontFamily: 'OpenSans',
+  fontWeight: FontWeight.w600,
+  fontSize: 15,
+  color: Color(0xFF444444),
+);
+
 const constituencyCardTextMedium = TextStyle(
   fontFamily: 'ProximaNova',
   fontWeight: FontWeight.w700,

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:i2connect/view/basewidget/custom_app_bar.dart';
 import 'package:i2connect/view/screen/dashboard/dashboard_screen.dart';
@@ -6,9 +5,7 @@ import 'package:i2connect/view/screen/ecampaigns/ecampaigns_screen.dart';
 import 'package:i2connect/view/screen/calendar/calendar_screen.dart';
 import 'package:i2connect/view/screen/votersdata/votersdata_screen.dart';
 import 'package:i2connect/view/screen/birthdays/birthdays_screen.dart';
-
 import '../../../util/color_resources.dart';
-import '../../../util/custom_themes.dart';
 
 class MainScreenView extends StatefulWidget {
   const MainScreenView({Key? key}) : super(key: key);
@@ -18,10 +15,9 @@ class MainScreenView extends StatefulWidget {
 }
 
 class _MainScreenViewState extends State<MainScreenView> {
-
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
       'Index 0: Home',
@@ -48,11 +44,10 @@ class _MainScreenViewState extends State<MainScreenView> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-
     });
   }
 
-  Widget getBody()  {
+  Widget getBody() {
     switch (_selectedIndex) {
       case 0:
         return const DashboardScreen();
@@ -69,7 +64,7 @@ class _MainScreenViewState extends State<MainScreenView> {
     }
   }
 
-  String getTitle()  {
+  String getTitle() {
     switch (_selectedIndex) {
       case 0:
         return 'Dashboard';
@@ -78,7 +73,7 @@ class _MainScreenViewState extends State<MainScreenView> {
       case 2:
         return 'Calender';
       case 3:
-        return 'Voter\'s ID';
+        return 'Voter\'s Data';
       case 4:
         return 'Birthday';
       default:

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:i2connect/data/bloc/dashboard/dashboard_cubit.dart';
 import 'package:i2connect/util/color_resources.dart';
 import 'package:i2connect/util/custom_themes.dart';
 import 'package:i2connect/provider/theme_provider.dart';
@@ -27,10 +29,11 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class DashboardScreenState extends State<DashboardScreen> {
-  final ScrollController _scrollController = ScrollController();
+  final _scrollController = ScrollController();
   List<bool> expanded = [false, false];
   @override
   void initState() {
+    BlocProvider.of<DashboardCubit>(context).initialize();
     super.initState();
   }
 
@@ -92,332 +95,373 @@ class DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Column(
+      body: BlocConsumer<DashboardCubit, DashboardState>(
+        buildWhen: (previous, current) => previous != current,
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          return SafeArea(
+            child: Stack(
               children: [
-                Expanded(
-                  child: ListView(
-                    controller: _scrollController,
-                    physics: const BouncingScrollPhysics(),
-                    padding: const EdgeInsets.all(0),
-                    children: [
-                      //Total Voters
-                      Container(
-                        child: Column(
-                          children: [
-                            Divider(
-                              height: 20,
-                              thickness: 2,
-                              endIndent: 0,
-                              color: ColorResources.getDividerGrey(context),
-                            ),
-                            Container(
-                              child: Row(
+                Column(
+                  children: [
+                    Expanded(
+                      child: ListView(
+                        controller: _scrollController,
+                        physics: const BouncingScrollPhysics(),
+                        padding: const EdgeInsets.all(0),
+                        children: [
+                          //Total Voters
+                          Column(
+                            children: [
+                              Divider(
+                                // height: 20,
+                                thickness: 2,
+                                endIndent: 0,
+                                color: ColorResources.getDividerGrey(context),
+                              ),
+                              Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Constituency",
                                     style: titleTabHeader,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   Image.asset(Images.expansionTileIcon),
                                 ],
                               ),
-                            ),
-                            Divider(
-                              height: 20,
-                              thickness: 2,
-                              endIndent: 0,
-                              color: ColorResources.getDividerGrey(context),
-                            ),
-                            Container(
-                              padding:
-                                  EdgeInsets.only(left: 20, right: 20, top: 10),
-                              child: Column(children: [
-                                Container(
-                                  padding: EdgeInsets.only(
-                                      left: 20, right: 20, top: 10, bottom: 10),
-                                  color: Color(0xFF00AF85),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                        child: Column(
+                              Divider(
+                                height: 20,
+                                thickness: 2,
+                                endIndent: 0,
+                                color: ColorResources.getDividerGrey(context),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.only(
+                                    left: 20, right: 20, top: 10),
+                                child: Column(children: [
+                                  Container(
+                                    padding: const EdgeInsets.only(
+                                        left: 20,
+                                        right: 20,
+                                        top: 10,
+                                        bottom: 10),
+                                    color: const Color(0xFF00AF85),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text(
+                                            const Text(
                                               "Total Voters",
                                               style: constituencyCardText,
                                               textAlign: TextAlign.left,
                                             ),
                                             Text(
-                                              "2,25,000",
+                                              state.voutersCount.total_voters
+                                                      ?.toString() ??
+                                                  '--',
                                               style: constituencyCardTextLarge,
                                             ),
                                           ],
                                         ),
-                                      ),
+                                        Container(
+                                            child: Image.asset(
+                                          Images.groupIcon,
+                                        ))
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.only(
+                                        left: 20,
+                                        right: 20,
+                                        bottom: 10,
+                                        top: 10),
+                                    color: const Color(0xFF24469D),
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          const Text(
+                                            "Male Voters",
+                                            style: constituencyCardText,
+                                          ),
+                                          Text(
+                                            state.voutersCount.male_voters
+                                                    ?.toString() ??
+                                                '--',
+                                            style: constituencyCardTextMedium,
+                                          ),
+                                        ]),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.only(
+                                        left: 20,
+                                        right: 20,
+                                        bottom: 10,
+                                        top: 10),
+                                    color: const Color(0xFFBC46B0),
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          const Text(
+                                            "Female Voters",
+                                            style: constituencyCardText,
+                                          ),
+                                          Text(
+                                            state.voutersCount.female_voters
+                                                    ?.toString() ??
+                                                '--',
+                                            style: constituencyCardTextMedium,
+                                          ),
+                                        ]),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.only(
+                                        left: 20,
+                                        right: 20,
+                                        bottom: 10,
+                                        top: 10),
+                                    color: const Color(0xFFDFB23E),
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          const Text(
+                                            "Other",
+                                            style: constituencyCardText,
+                                          ),
+                                          Text(
+                                            state.voutersCount.other_voters
+                                                    ?.toString() ??
+                                                '--',
+                                            style: constituencyCardTextMedium,
+                                          ),
+                                        ]),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Container(
+                                    alignment: Alignment.bottomRight,
+                                    child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          InkWell(
+                                            child: const Text(
+                                              "View as Chart",
+                                              style: TextStyle(
+                                                fontFamily: 'ProximaNova',
+                                                fontSize: 13,
+                                                color: Color(0xFF0047B2),
+                                                decoration:
+                                                    TextDecoration.underline,
+                                              ),
+                                            ),
+                                            onTap: () => print("View as Chart"),
+                                          ),
+                                        ]),
+                                  ),
+                                ]),
+                              ),
+                              Divider(
+                                height: 20,
+                                thickness: 2,
+                                endIndent: 0,
+                                color: ColorResources.getDividerGrey(context),
+                              ),
+                            ],
+                          ),
+                          //Charts Card
+                          Container(
+                            padding: EdgeInsets.only(left: 20, right: 20),
+                            child: Column(
+                              children: [
+                                Container(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      InkWell(
+                                          child: Container(
+                                              padding: EdgeInsets.only(
+                                                  left: 10,
+                                                  right: 10,
+                                                  top: 8,
+                                                  bottom: 8),
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color: Color(0xFF0047B2),
+                                                  width: 1,
+                                                  style: BorderStyle.solid,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    "Caste/Vote Favor",
+                                                    style: TextStyle(
+                                                        color:
+                                                            Color(0xFFAEAEAE),
+                                                        fontFamily:
+                                                            "ProximaNova",
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Image.asset(
+                                                      Images.expansionTileIcon)
+                                                ],
+                                              ))),
                                       Container(
-                                          child: Image.asset(
-                                        Images.groupIcon,
-                                      ))
+                                        //margin: const EdgeInsets.only(left: 100, right: 100, bottom: 20, top: 30),
+                                        child: BlueButton(
+                                          buttonText: 'Filter',
+                                          width: 80,
+                                          height: 38,
+                                          radius: 5,
+                                          onTap: () => Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      const DashboardScreen())),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
-                                const SizedBox(
+                                Container(
+                                  padding: EdgeInsets.only(top: 10, bottom: 5),
+                                  child: Text(
+                                    "Search appears based on filters",
+                                    style: titleSemiMedium,
+                                  ),
+                                  alignment: Alignment.bottomLeft,
+                                ),
+                                DashBoardCharts(),
+                                SizedBox(
                                   height: 10,
                                 ),
-                                Container(
-                                  padding: EdgeInsets.only(
-                                      left: 20, right: 20, bottom: 10, top: 10),
-                                  color: Color(0xFF24469D),
-                                  child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Male Voters",
-                                          style: constituencyCardText,
-                                        ),
-                                        Text(
-                                          "1,30,000",
-                                          style: constituencyCardTextMedium,
-                                        ),
-                                      ]),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  padding: EdgeInsets.only(
-                                      left: 20, right: 20, bottom: 10, top: 10),
-                                  color: Color(0xFFBC46B0),
-                                  child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Female Voters",
-                                          style: constituencyCardText,
-                                        ),
-                                        Text(
-                                          "1,30,000",
-                                          style: constituencyCardTextMedium,
-                                        ),
-                                      ]),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  padding: EdgeInsets.only(
-                                      left: 20, right: 20, bottom: 10, top: 10),
-                                  color: Color(0xFFDFB23E),
-                                  child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Other",
-                                          style: constituencyCardText,
-                                        ),
-                                        Text(
-                                          "1,30,000",
-                                          style: constituencyCardTextMedium,
-                                        ),
-                                      ]),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  alignment: Alignment.bottomRight,
-                                  child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        InkWell(
-                                          child: Text(
-                                            "View as Chart",
-                                            style: TextStyle(
-                                              fontFamily: 'ProximaNova',
-                                              fontSize: 13,
-                                              color: Color(0xFF0047B2),
-                                              decoration:
-                                                  TextDecoration.underline,
-                                            ),
-                                          ),
-                                          onTap: () => print("View as Chart"),
-                                        ),
-                                      ]),
-                                ),
-                              ]),
-                            ),
-                            Divider(
-                              height: 20,
-                              thickness: 2,
-                              endIndent: 0,
-                              color: ColorResources.getDividerGrey(context),
-                            ),
-                          ],
-                        ),
-                      ),
-                      //Charts Card
-                      Container(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        child: Column(
-                          children: [
-                            Container(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  InkWell(
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {},
                                       child: Container(
-                                          padding: EdgeInsets.only(
-                                              left: 10,
-                                              right: 10,
-                                              top: 8,
-                                              bottom: 8),
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: Color(0xFF0047B2),
-                                              width: 1,
-                                              style: BorderStyle.solid,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "Caste/Vote Favor",
-                                                style: TextStyle(
-                                                    color: Color(0xFFAEAEAE),
-                                                    fontFamily: "ProximaNova",
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Image.asset(
-                                                  Images.expansionTileIcon)
-                                            ],
-                                          ))),
-                                  Container(
-                                    //margin: const EdgeInsets.only(left: 100, right: 100, bottom: 20, top: 30),
-                                    child: BlueButton(
-                                      buttonText: 'Filter',
-                                      width: 80,
-                                      height: 38,
-                                      radius: 5,
-                                      onTap: () => Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (_) =>
-                                                  const DashboardScreen())),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(top: 10, bottom: 5),
-                              child: Text(
-                                "Search appears based on filters",
-                                style: titleSemiMedium,
-                              ),
-                              alignment: Alignment.bottomLeft,
-                            ),
-                            DashBoardCharts(),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: Container(
-                                    width: 40,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(40),
-                                        color: Color(0XFFE1E1E1),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color:
-                                                  Colors.grey.withOpacity(0.2),
-                                              spreadRadius: 1,
-                                              blurRadius: 5)
-                                        ],
+                                        width: 40,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(40),
+                                          color: Color(0XFFE1E1E1),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.grey
+                                                    .withOpacity(0.2),
+                                                spreadRadius: 1,
+                                                blurRadius: 5)
+                                          ],
                                         ),
-                                    child: Center(
-                                        child: const Icon(
-                                      Icons.chevron_left,
-                                      color: Color(0xFF717171),
-                                      size: 40,
-                                    )),
-                                  ),
+                                        child: Center(
+                                            child: const Icon(
+                                          Icons.chevron_left,
+                                          color: Color(0xFF717171),
+                                          size: 40,
+                                        )),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {},
+                                      child: Container(
+                                        width: 40,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.2),
+                                                  spreadRadius: 1,
+                                                  blurRadius: 5)
+                                            ],
+                                            border: Border.all(
+                                                width: 0.5,
+                                                color: Color(0xFFD8D8D8)),
+                                            borderRadius:
+                                                BorderRadius.circular(40),
+                                            color: Colors.white),
+                                        child: Center(
+                                            child: const Icon(
+                                          Icons.chevron_right,
+                                          color: Colors.black,
+                                          size: 40,
+                                        )),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(
-                                  width: 10,
+                                  height: 15,
                                 ),
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: Container(
-                                    width: 40,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color:
-                                                  Colors.grey.withOpacity(0.2),
-                                              spreadRadius: 1,
-                                              blurRadius: 5)
-                                        ],
-                                        border: Border.all(
-                                            width: 0.5, color: Color(0xFFD8D8D8)),
-                                        borderRadius: BorderRadius.circular(40),
-                                        color: Colors.white),
-                                    child: Center(
-                                        child: const Icon(
-                                      Icons.chevron_right,
-                                      color: Colors.black,
-                                      size: 40,
-                                    )),
-                                  ),
+                                ImportantPeople(
+                                  importantPeopleList:
+                                      state.importantPeopleList,
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                WardIssues(
+                                  isDashboard: true,
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                TodoList(),
+                                SizedBox(
+                                  height: 30,
                                 ),
                               ],
                             ),
-                            SizedBox(height: 15,),
-                            ImportantPeople(isDashboard: true,),
-                            SizedBox(height: 15,),
-                            WardIssues(isDashboard: true,),
-                            SizedBox(height: 15,),
-                            TodoList(),
-                            SizedBox(height: 30,),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
+          );
+        },
       ),
-
     );
   }
 }

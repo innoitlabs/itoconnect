@@ -1,8 +1,13 @@
-
 class AppConstants {
   static const String appName = '12connect';
   static const String appVersion = '1.0';
-  static const String baseUrl = 'https://6valley.6amtech.com';
+  static const String baseUrl = 'https://test-api.itoconnect.online/';
+  static const String signIn = 'signin/';
+  static const String signup = 'signup/';
+  static const String votersCount = 'dashboard/voter_count/';
+  static const String importantPeople = 'dashboard/imp/';
+  static const String statesAndRoles = 'dropdown/';
+  static const String districts = 'dropdown/?state_id=';
   static const String userId = 'userId';
   static const String name = 'name';
 

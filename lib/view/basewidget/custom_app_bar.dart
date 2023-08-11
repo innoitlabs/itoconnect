@@ -3,7 +3,9 @@ import 'package:i2connect/provider/theme_provider.dart';
 import 'package:i2connect/util/custom_themes.dart';
 import 'package:i2connect/util/dimensions.dart';
 import 'package:i2connect/util/images.dart';
+import 'package:i2connect/view/screen/auth/sign_in.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String? title;
@@ -12,7 +14,14 @@ class CustomAppBar extends StatelessWidget {
   final Function? onActionPressed;
   final Function? onBackPressed;
 
-  const CustomAppBar({Key? key, required this.title, this.isBackButtonExist = true, this.icon, this.onActionPressed, this.onBackPressed}) : super(key: key);
+  const CustomAppBar(
+      {Key? key,
+      required this.title,
+      this.isBackButtonExist = true,
+      this.icon,
+      this.onActionPressed,
+      this.onBackPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +30,17 @@ class CustomAppBar extends StatelessWidget {
         margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
         height: 60,
         alignment: Alignment.center,
-        child:
-        Row(
+        child: Row(
           children: [
             Align(
               alignment: Alignment.centerLeft,
-              child:
-              IconButton(icon: const Icon(Icons.menu, color:Colors.grey,size: 32,),
-                onPressed: () => Navigator.pop(context),
+              child: IconButton(
+                icon: const Icon(
+                  Icons.menu,
+                  color: Colors.grey,
+                  size: 32,
+                ),
+                onPressed: () {},
               ),
             ),
             Align(
@@ -36,8 +48,28 @@ class CustomAppBar extends StatelessWidget {
               child: Container(
                 width: MediaQuery.of(context).size.width - 100,
                 alignment: Alignment.center,
-                child: Text(title!,
-                    style: titleHeader),
+                child: Text(title!, style: titleHeader),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: IconButton(
+                icon: const Icon(
+                  Icons.logout,
+                  color: Colors.grey,
+                  size: 32,
+                ),
+                onPressed: () async {
+                  SharedPreferences preferences =
+                      await SharedPreferences.getInstance();
+                  preferences.clear();
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SignInScreen(),
+                      ),
+                      (route) => false);
+                },
               ),
             ),
           ],

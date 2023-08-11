@@ -7,6 +7,7 @@ import 'package:i2connect/util/images.dart';
 import 'package:i2connect/view/basewidget/button/custom_button.dart';
 import 'package:i2connect/view/basewidget/textfield/custom_password_textfield.dart';
 import 'package:i2connect/view/basewidget/textfield/custom_textfield.dart';
+import 'package:i2connect/view/screen/mainscreen/mainscreen.dart';
 import 'package:provider/provider.dart';
 import 'forgot_password.dart';
 import 'sign_up.dart';
@@ -47,87 +48,102 @@ class SignInScreenState extends State<SignInScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          Provider.of<ThemeProvider>(context).darkTheme ? const SizedBox()
-              : Image.asset(Images.authBackgroundImage, fit: BoxFit.fill,
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width),
+          Provider.of<ThemeProvider>(context).darkTheme
+              ? const SizedBox()
+              : Image.asset(Images.authBackgroundImage,
+                  fit: BoxFit.fill,
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: Dimensions.topSpace),
-              Image.asset(Images.i2connectLogoGoldImage, height: 100, width: 200),
-              Image.asset(Images.i2connectLogoTitleImage, height: 20,width: 100,),
+              Image.asset(Images.i2connectLogoGoldImage,
+                  height: 100, width: 200),
+              Image.asset(
+                Images.i2connectLogoTitleImage,
+                height: 20,
+                width: 100,
+              ),
               const SizedBox(height: 50),
               Container(
-                child: Text('Login',
-                    style: titleHeader),
+                child: Text('Login', style: titleHeader),
               ),
               Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: Dimensions.marginSizeLarge),
-                    child: Form(
-                      key: _formKeyLogin,
-                      child: ListView(
-                        padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeSmall),
-                        children: [
-                          Container(
-                              margin:
-                              const EdgeInsets.only(bottom: Dimensions.marginSizeSmall),
-                              child: CustomTextField(
-                                hintText: "Enter your Email Id",
-                                focusNode: _emailNode,
-                                nextNode: _passNode,
-                                textInputType: TextInputType.emailAddress,
-                                controller: _emailController,
-                              )),
-                          Container(
-                              margin:
-                              const EdgeInsets.only(bottom: Dimensions.marginSizeSmall),
-                              child: CustomPasswordTextField(
-                                hintTxt: 'Enter your password',
-                                textInputAction: TextInputAction.done,
-                                focusNode: _passNode,
-                                controller: _passwordController,
-                              )),
-                          InkWell(
-                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const ForgotPasswordScreen())),
-                            child: Container(
-                              child: Text('Forgot Password?',
-                                  style: titilliumSemiBold),
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(left: 100, right: 100, bottom: 20, top: 30),
-                            child: CustomButton(
-                              buttonText: 'Sign In',
-                              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const DashboardScreen())),
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            child: Text("Don't have an account?",
-                                style: titilliumSemiBoldGray),
-                          ),
-                          InkWell(
-                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SignUpScreen())),
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: Text('Sign Up',
-                                  style: titilliumSemiBoldGreenLarge),
-                            ),
-                          ),
-                          const SizedBox(width: Dimensions.paddingSizeDefault),
-                        ],
+                padding: const EdgeInsets.symmetric(
+                    horizontal: Dimensions.marginSizeLarge),
+                child: Form(
+                  key: _formKeyLogin,
+                  child: ListView(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: Dimensions.paddingSizeSmall),
+                    children: [
+                      Container(
+                          margin: const EdgeInsets.only(
+                              bottom: Dimensions.marginSizeSmall),
+                          child: CustomTextField(
+                            hintText: "Enter your Email Id",
+                            focusNode: _emailNode,
+                            nextNode: _passNode,
+                            textInputType: TextInputType.emailAddress,
+                            controller: _emailController,
+                          )),
+                      Container(
+                          margin: const EdgeInsets.only(
+                              bottom: Dimensions.marginSizeSmall),
+                          child: CustomPasswordTextField(
+                            hintTxt: 'Enter your password',
+                            textInputAction: TextInputAction.done,
+                            focusNode: _passNode,
+                            controller: _passwordController,
+                          )),
+                      InkWell(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const ForgotPasswordScreen())),
+                        child: Container(
+                          child: Text('Forgot Password?',
+                              style: titilliumSemiBold),
+                        ),
                       ),
-                    ),
-                  )
-              )
+                      Container(
+                        margin: const EdgeInsets.only(
+                            left: 100, right: 100, bottom: 20, top: 30),
+                        child: CustomButton(
+                          buttonText: 'Sign In',
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => const MainScreenView())),
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        child: Text("Don't have an account?",
+                            style: titilliumSemiBoldGray),
+                      ),
+                      InkWell(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const SignUpScreen())),
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text('Sign Up',
+                              style: titilliumSemiBoldGreenLarge),
+                        ),
+                      ),
+                      const SizedBox(width: Dimensions.paddingSizeDefault),
+                    ],
+                  ),
+                ),
+              ))
             ],
           ),
         ],
       ),
-
     );
   }
-
 }

@@ -1,53 +1,53 @@
-import 'package:i2connect/data/datasource/remote/dio/dio_client.dart';
-import 'package:i2connect/data/datasource/remote/exception/api_error_handler.dart';
-import 'package:i2connect/data/model/response/base/api_response.dart';
-import 'package:i2connect/util/app_constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:i2connect/data/datasource/remote/dio/dio_client.dart';
+// import 'package:i2connect/data/datasource/remote/exception/api_error_handler.dart';
+// import 'package:i2connect/data/model/response/base/api_response.dart';
+// import 'package:i2connect/util/app_constants.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
-class SplashRepo {
-  final DioClient? dioClient;
-  final SharedPreferences? sharedPreferences;
-  SplashRepo({required this.dioClient, required this.sharedPreferences});
+// class SplashRepo {
+//   final DioClient? dioClient;
+//   final SharedPreferences? sharedPreferences;
+//   SplashRepo({required this.dioClient, required this.sharedPreferences});
 
-  Future<ApiResponse> getConfig() async {
-    try {
-      final response = await dioClient!.get(AppConstants.configUri);
-      return ApiResponse.withSuccess(response);
-    } catch (e) {
-      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
-    }
-  }
+//   Future<ApiResponse> getConfig() async {
+//     try {
+//       final response = await dioClient!.get(AppConstants.configUri);
+//       return ApiResponse.withSuccess(response);
+//     } catch (e) {
+//       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
+//     }
+//   }
 
-  void initSharedData() async {
-    if (!sharedPreferences!.containsKey(AppConstants.cartList)) {
-      sharedPreferences!.setStringList(AppConstants.cartList, []);
-    }
-    if (!sharedPreferences!.containsKey(AppConstants.searchAddress)) {
-      sharedPreferences!.setStringList(AppConstants.searchAddress, []);
-    }
-    if (!sharedPreferences!.containsKey(AppConstants.intro)) {
-      sharedPreferences!.setBool(AppConstants.intro, true);
-    }
-    if(!sharedPreferences!.containsKey(AppConstants.currency)) {
-      sharedPreferences!.setString(AppConstants.currency, '');
-    }
-  }
+//   void initSharedData() async {
+//     if (!sharedPreferences!.containsKey(AppConstants.cartList)) {
+//       sharedPreferences!.setStringList(AppConstants.cartList, []);
+//     }
+//     if (!sharedPreferences!.containsKey(AppConstants.searchAddress)) {
+//       sharedPreferences!.setStringList(AppConstants.searchAddress, []);
+//     }
+//     if (!sharedPreferences!.containsKey(AppConstants.intro)) {
+//       sharedPreferences!.setBool(AppConstants.intro, true);
+//     }
+//     if(!sharedPreferences!.containsKey(AppConstants.currency)) {
+//       sharedPreferences!.setString(AppConstants.currency, '');
+//     }
+//   }
 
-  String getCurrency() {
-    return sharedPreferences!.getString(AppConstants.currency) ?? '';
-  }
+//   String getCurrency() {
+//     return sharedPreferences!.getString(AppConstants.currency) ?? '';
+//   }
 
-  void setCurrency(String currencyCode) {
-    sharedPreferences!.setString(AppConstants.currency, currencyCode);
-  }
+//   void setCurrency(String currencyCode) {
+//     sharedPreferences!.setString(AppConstants.currency, currencyCode);
+//   }
 
-  void disableIntro() {
-    sharedPreferences!.setBool(AppConstants.intro, false);
-  }
+//   void disableIntro() {
+//     sharedPreferences!.setBool(AppConstants.intro, false);
+//   }
 
-  bool? showIntro() {
-    return sharedPreferences!.getBool(AppConstants.intro);
-  }
+//   bool? showIntro() {
+//     return sharedPreferences!.getBool(AppConstants.intro);
+//   }
 
 
-}
+// }

@@ -97,9 +97,6 @@ class DashboardScreenState extends State<DashboardScreen> {
           children: [
             Column(
               children: [
-                CustomAppBar(
-                  title: "Dashboard",
-                ),
                 Expanded(
                   child: ListView(
                     controller: _scrollController,
@@ -420,35 +417,7 @@ class DashboardScreenState extends State<DashboardScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard),
-            label: 'Dashboard',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.campaign),
-            label: 'E-Campaign',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_month),
-            label: 'Calendar',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.insert_chart),
-            label: "Voter's Data",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.card_giftcard),
-            label: "Birthdays",
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Theme.of(context).primaryColor,
-        unselectedItemColor: ColorResources.getDarkGrey(context),
-        onTap: _onItemTapped,
-      ),
+
     );
   }
 }

@@ -11,7 +11,6 @@ class ImageDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
       child: SingleChildScrollView(
         child: Column(
@@ -25,7 +24,6 @@ class ImageDialog extends StatelessWidget {
                 onPressed: () => Navigator.of(context).pop(),
               ),
             ),
-
             Container(
               height: MediaQuery.of(context).size.height-150,
               width: MediaQuery.of(context).size.width,

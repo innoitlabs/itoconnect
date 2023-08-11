@@ -1,13 +1,19 @@
-
 class Images {
   static const String i2connectLogoImage = 'assets/images/itoconnect_logo.png';
-  static const String i2connectLogoGoldImage = 'assets/images/itoconnect_logo_gold.png';
-  static const String i2connectLogoTitleImage = 'assets/images/itoconnect_logo_title.png';
+  static const String i2connectLogoGoldImage =
+      'assets/images/itoconnect_logo_gold.png';
+  static const String i2connectLogoTitleImage =
+      'assets/images/itoconnect_logo_title.png';
   static const String authBackgroundImage = 'assets/images/auth_background.png';
   static const String backIcon = 'assets/images/back_icon.png';
-  static const String expansionTileIcon = 'assets/images/expansion_tile_icon.png';
+  static const String expansionTileIcon =
+      'assets/images/expansion_tile_icon.png';
   static const String groupIcon = 'assets/images/group_icon.png';
   static const String pieChart = 'assets/images/pie_chart.png';
+
+  static const String refresh = 'assets/images/refresh.png';
+  static const String pdf = 'assets/images/pdf.png';
+  static const String excel = 'assets/images/excel.png';
 
   static const String splashLogo = 'assets/images/logo_splash.png';
   static const String moreFilledImage = 'assets/images/more_filled.png';
@@ -17,7 +23,8 @@ class Images {
   static const String officeImage = 'assets/images/office.png';
   static const String logoImage = 'assets/images/logo.png';
   static const String logoWithNameImage = 'assets/images/logo_with_name.png';
-  static const String logoWithNameImageWhite = 'assets/images/logo_with_name_white.png';
+  static const String logoWithNameImageWhite =
+      'assets/images/logo_with_name_white.png';
   static const String messageImage = 'assets/images/inbox.png';
   static const String moreImage = 'assets/images/more.png';
   static const String shoppingImage = 'assets/images/order.png';
@@ -28,13 +35,15 @@ class Images {
   static const String filterImage = 'assets/images/filter.png';
   static const String fastDelivery = 'assets/images/fast_delivery.png';
   static const String delivery = 'assets/images/delivery.png';
-  static const String toolbarBackground = 'assets/images/toolbar_background.jpg';
+  static const String toolbarBackground =
+      'assets/images/toolbar_background.jpg';
   static const String editTwo = 'assets/images/edit_2.png';
   static const String chat = 'assets/images/chat.png';
   static const String chats = 'assets/images/chats.png';
   static const String helpCenter = 'assets/images/help_center.png';
   static const String language = 'assets/images/language.png';
-  static const String notificationFilled = 'assets/images/notification_filled.png';
+  static const String notificationFilled =
+      'assets/images/notification_filled.png';
   static const String notification = 'assets/images/notification.png';
   static const String offers = 'assets/images/offers.png';
   static const String preference = 'assets/images/preference.png';
@@ -72,13 +81,14 @@ class Images {
   static const String placeholder_1x1 = 'assets/images/placeholder_1x1.png';
   static const String placeholder_3x1 = 'assets/images/placeholder_3x1.png';
   static const String wallet = 'assets/images/wallet.png';
-  static const String loyaltyPoint  = 'assets/images/trophy.png';
-  static const String loyaltyTrophy  = 'assets/images/loyalty.png';
-  static const String fileDownload  = 'assets/images/cloud-download.png';
-  static const String callIcon  = 'assets/images/call_icon.png';
-  static const String smsIcon  = 'assets/images/sms_icon.png';
+  static const String loyaltyPoint = 'assets/images/trophy.png';
+  static const String loyaltyTrophy = 'assets/images/loyalty.png';
+  static const String fileDownload = 'assets/images/cloud-download.png';
+  static const String callIcon = 'assets/images/call_icon.png';
+  static const String smsIcon = 'assets/images/sms_icon.png';
   static const String searchIcon = 'assets/images/search_icon.png';
-  static const String splashScreenLogo = 'assets/images/logo_with_name_white.png';
+  static const String splashScreenLogo =
+      'assets/images/logo_with_name_white.png';
   static const String cPolicy = 'assets/images/c_policy.png';
   static const String returnPolicy = 'assets/images/return_policy.png';
   static const String refundPolicy = 'assets/images/refund_policy.png';

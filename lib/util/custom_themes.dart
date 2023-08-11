@@ -37,6 +37,13 @@ const constituencyCardTextLarge = TextStyle(
   color: Colors.white,
 );
 
+const addPictureTextStyle = TextStyle(
+  fontFamily: 'OpenSans',
+  fontWeight: FontWeight.w600,
+  fontSize: 15,
+  color: Color(0xFF444444),
+);
+
 const constituencyCardTextMedium = TextStyle(
   fontFamily: 'ProximaNova',
   fontWeight: FontWeight.w700,
@@ -49,6 +56,31 @@ const titleHeader = TextStyle(
   fontWeight: FontWeight.w600,
   fontSize: Dimensions.fontSizeOverLarge,
   color: Color(0xFF1455AC),
+);
+const textFieldHeader = TextStyle(
+  fontFamily: 'ProximaNova',
+  fontWeight: FontWeight.w700,
+  fontSize: Dimensions.fontSizeLarge,
+  color: Colors.black87,
+);
+const textFieldItalic = TextStyle(
+  fontFamily: 'ProximaNova',
+  fontWeight: FontWeight.w600,
+  fontStyle: FontStyle.italic,
+  fontSize: Dimensions.fontSizeSmall,
+  color: Color(0xFF8B93A5),
+);
+const textFieldSubHeader = TextStyle(
+  fontFamily: 'ProximaNova',
+  fontWeight: FontWeight.w600,
+  fontSize: Dimensions.paddingSizeDefault,
+  color: Colors.black87,
+);
+const actionButtonStyle = TextStyle(
+  fontFamily: 'ProximaNova',
+  fontWeight: FontWeight.w600,
+  fontSize: Dimensions.homePagePadding,
+  color: Colors.white,
 );
 const titleCardHeader = TextStyle(
   fontFamily: 'ProximaNova',

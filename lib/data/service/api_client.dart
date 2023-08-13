@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:either_dart/either.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,7 +21,8 @@ class APIClient {
     try {
       final response =
           await http.get(Uri.parse('$baseUrl$endpoint'), headers: headers);
-
+      debugPrint('${response.request?.url}');
+      debugPrint('${response.statusCode}');
       if (response.statusCode == 200) {
         return Left(response);
       } else {

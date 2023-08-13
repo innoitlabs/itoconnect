@@ -146,6 +146,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                               child: CustomTextField(
                                 hintText: "Phone Number",
                                 textInputType: TextInputType.emailAddress,
+                                isPhoneNumber: true,
                                 controller: phoneNumberController,
                                 isValidator: true,
                                 validatorMessage: 'Mandatory',

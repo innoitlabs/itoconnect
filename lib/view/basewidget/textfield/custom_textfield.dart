@@ -28,23 +28,25 @@ class CustomTextField extends StatelessWidget {
   final TextAlign? textAlign;
   final bool isEnable;
 
-  const CustomTextField(
-      {Key? key, this.controller,
-      this.hintText,
-      this.textInputType,
-      this.maxLine,
-      this.focusNode,
-        this.suffix,
-      this.nextNode,
-      this.textInputAction,
-      this.isPhoneNumber = false,
-      this.isValidator=false,
-      this.validatorMessage,
-      this.capitalization = TextCapitalization.none,
-      this.fillColor,
-      this.isBorder = false, this.textAlign,
-        this.isEnable = true,
-      }) : super(key: key);
+  const CustomTextField({
+    Key? key,
+    this.controller,
+    this.hintText,
+    this.textInputType,
+    this.maxLine,
+    this.focusNode,
+    this.suffix,
+    this.nextNode,
+    this.textInputAction,
+    this.isPhoneNumber = false,
+    this.isValidator = false,
+    this.validatorMessage,
+    this.capitalization = TextCapitalization.none,
+    this.fillColor,
+    this.isBorder = false,
+    this.textAlign,
+    this.isEnable = true,
+  }) : super(key: key);
 
   @override
   Widget build(context) {
@@ -54,18 +56,30 @@ class CustomTextField extends StatelessWidget {
         //border: isBorder? Border.all(width: .8,color: Theme.of(context).hintColor):null,
         // border: Border.all(width: .8,color: Theme.of(context).hintColor),
         color: Theme.of(context).highlightColor,
-        borderRadius: isPhoneNumber ? const BorderRadius.only(topRight: Radius.circular(6), bottomRight: Radius.circular(6)) : BorderRadius.circular(6),
+        borderRadius: isPhoneNumber
+            ? const BorderRadius.only(
+                topRight: Radius.circular(6), bottomRight: Radius.circular(6))
+            : BorderRadius.circular(6),
         boxShadow: [
-          BoxShadow(color: Colors.grey.withOpacity(0.1), spreadRadius: 1, blurRadius: 3, offset: const Offset(0, 1)) // changes position of shadow
+          BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 1,
+              blurRadius: 3,
+              offset: const Offset(0, 1)) // changes position of shadow
         ],
       ),
       child: Row(
         children: [
           Expanded(
             child: TextFormField(
-              textAlign: textAlign != null? textAlign! : isBorder? TextAlign.center:TextAlign.start,
+              textAlign: textAlign != null
+                  ? textAlign!
+                  : isBorder
+                      ? TextAlign.center
+                      : TextAlign.start,
               controller: controller,
               maxLines: maxLine ?? 1,
+
               textCapitalization: capitalization,
               maxLength: isPhoneNumber ? 15 : null,
               focusNode: focusNode,
@@ -78,26 +92,33 @@ class CustomTextField extends StatelessWidget {
                 FocusScope.of(context).requestFocus(nextNode);
               },
               //autovalidate: true,
-              inputFormatters: [isPhoneNumber ? FilteringTextInputFormatter.digitsOnly : FilteringTextInputFormatter.singleLineFormatter],
-              validator: (input){
-                if(input!.isEmpty){
-                  if(isValidator){
-                    return validatorMessage??"";
+              inputFormatters: [
+                isPhoneNumber
+                    ? FilteringTextInputFormatter.digitsOnly
+                    : FilteringTextInputFormatter.singleLineFormatter
+              ],
+              validator: (input) {
+                if (input!.isEmpty) {
+                  if (isValidator) {
+                    return validatorMessage ?? "";
                   }
                 }
                 return null;
-
               },
 
               decoration: InputDecoration(
                 hintText: hintText ?? '',
                 filled: fillColor != null,
                 fillColor: fillColor,
-                contentPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 15),
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 12.0, horizontal: 15),
                 isDense: true,
                 counterText: '',
-                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor)),
-                hintStyle: titilliumRegular.copyWith(color: Theme.of(context).hintColor),
+                focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Theme.of(context).primaryColor)),
+                hintStyle: titilliumRegular.copyWith(
+                    color: Theme.of(context).hintColor),
                 errorStyle: const TextStyle(height: 1.5),
                 border: InputBorder.none,
               ),

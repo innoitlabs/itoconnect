@@ -38,10 +38,14 @@ class APIService {
             'email': emailEncrypted,
             'password': passwordEncrypted
           }).then((value) {
-        if (value.isLeft) {
+        if (value.isLeft && (jsonDecode(value.left.body)['status'] ?? false)) {
           return SignInResponseModel.fromJson(jsonDecode(value.left.body));
         } else {
-          Fluttertoast.showToast(msg: value.right.toString());
+          if (value.isLeft) {
+            Fluttertoast.showToast(msg: jsonDecode(value.left.body)['message']);
+          } else {
+            Fluttertoast.showToast(msg: value.right.toString());
+          }
           return null;
         }
       });
@@ -60,30 +64,73 @@ class APIService {
     required DistrictModel districtDetails,
     required ConstituencyModel constituencyDetails,
   }) async {
+    final data = {
+      "email_id": email,
+      "first_name": firstName,
+      "last_name": lastName,
+      "password": "User",
+      "phone_no": phone,
+      "country": stateDetails.country,
+      "state": stateDetails.state_id,
+      "dist": districtDetails.dist_id,
+      "constituency": constituencyDetails.constituency_id,
+      "role": roleDetails.role_id
+    };
+    if (data.containsValue(null) || data.containsValue('')) {
+      Fluttertoast.showToast(msg: 'Please select all fields');
+      return false;
+    }
+
     try {
       return await getIt<APIClient>()
-          .post(endpoint: AppConstants.signup, data: {
-        "email_id": email,
-        "first_name": firstName,
-        "last_name": lastName,
-        "password": "User",
-        "phone_no": phone,
-        "country": stateDetails.country,
-        "state": stateDetails.state_id,
-        "dist": districtDetails.dist_id,
-        "constituency": constituencyDetails.constituency_id,
-        "role": roleDetails.role_id
-      }).then((value) {
-        if (value.isLeft) {
-          print(jsonDecode(value.left.body)['status']);
+          .post(endpoint: AppConstants.signup, data: data)
+          .then((value) {
+        if (value.isLeft && (jsonDecode(value.left.body)['status'] ?? false)) {
+          print(jsonDecode(value.left.body));
           return true;
         } else {
-          Fluttertoast.showToast(msg: value.right.toString());
+          debugPrint(value.left.body);
+          if (value.isLeft) {
+            Fluttertoast.showToast(msg: jsonDecode(value.left.body)['message']);
+          } else {
+            Fluttertoast.showToast(msg: value.right.toString());
+          }
           return false;
         }
       });
     } catch (e) {
-      throw Exception('Network error: $e');
+      return false;
+    }
+  }
+
+  Future<bool> verifyotp({
+    required String email,
+    required String otp,
+  }) async {
+    final data = {"email_id": email, "otp": otp};
+    if (data.containsValue(null) || data.containsValue('')) {
+      Fluttertoast.showToast(msg: 'Please select all fields');
+      return false;
+    }
+
+    try {
+      return await getIt<APIClient>()
+          .post(endpoint: AppConstants.verifyotp, data: data)
+          .then((value) {
+        if (value.isLeft && (jsonDecode(value.left.body)['status'] ?? false)) {
+          return true;
+        } else {
+          debugPrint(value.left.body);
+          if (value.isLeft) {
+            Fluttertoast.showToast(msg: jsonDecode(value.left.body)['message']);
+          } else {
+            Fluttertoast.showToast(msg: value.right.toString());
+          }
+          return false;
+        }
+      });
+    } catch (e) {
+      return false;
     }
   }
 

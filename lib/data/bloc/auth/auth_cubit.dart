@@ -133,4 +133,19 @@ class AuthCubit extends Cubit<AuthState> {
       }
     });
   }
+
+  Future<bool> onClickVerifyOTP(
+      {required String email, required String otp}) async {
+    emit(state.copyWith(isLoading: true));
+    return await getIt<APIService>()
+        .verifyotp(email: email, otp: otp)
+        .then((value) {
+      emit(state.copyWith(isLoading: false));
+      if (value) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
 }

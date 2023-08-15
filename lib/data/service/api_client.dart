@@ -24,6 +24,7 @@ class APIClient {
       debugPrint('${response.request?.url}');
       debugPrint('${response.statusCode}');
       if (response.statusCode == 200) {
+        debugPrint(response.body);
         return Left(response);
       } else {
         return Right(Exception(jsonDecode(response.body)['message']));
@@ -43,6 +44,7 @@ class APIClient {
       );
 
       if (response.statusCode == 200) {
+        debugPrint(response.body);
         return Left(response);
       } else {
         return Right(Exception(jsonDecode(response.body)['message']));

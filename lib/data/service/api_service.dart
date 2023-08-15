@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:i2connect/data/injection/singleton.dart';
 import 'package:i2connect/data/service/api_client.dart';
+import 'package:i2connect/model/dashboard/dashboard/dashboard_model.dart';
 import 'package:i2connect/model/dashboard/important_people/important_people_model.dart';
 import 'package:i2connect/model/dashboard/voterscount/voterscount_model.dart';
 import 'package:i2connect/model/signin/constituency/constituency_model.dart';
@@ -134,6 +135,23 @@ class APIService {
     }
   }
 
+  Future<DashboardModel?> getDashboardDropdownDetails() async {
+    try {
+      return await getIt<APIClient>()
+          .get(endpoint: AppConstants.dropdowndb)
+          .then((value) {
+        if (value.isLeft) {
+          return DashboardModel.fromJson(jsonDecode(value.left.body));
+        } else {
+          Fluttertoast.showToast(msg: value.right.toString());
+          return null;
+        }
+      });
+    } catch (e) {
+      throw Exception('Network error: $e');
+    }
+  }
+
   Future<StatesAndRolesModel?> getDropdownRolesAndStates() async {
     try {
       return await getIt<APIClient>()
@@ -200,13 +218,47 @@ class APIService {
     }
   }
 
-  Future<VotersCountModel?> getVotersCount() async {
+  Future<VotersCountModel?> getVotersCount(String? data) async {
     try {
       return await getIt<APIClient>()
-          .get(endpoint: AppConstants.votersCount)
+          .get(endpoint: AppConstants.votersCount + (data ?? ''))
           .then((value) {
         if (value.isLeft) {
           return VotersCountModel.fromJson(jsonDecode(value.left.body));
+        } else {
+          Fluttertoast.showToast(msg: value.right.toString());
+          return null;
+        }
+      });
+    } catch (e) {
+      throw Exception('Network error: $e');
+    }
+  }
+
+  Future<FavourToModel?> getFavourToDetails(String? data) async {
+    try {
+      return await getIt<APIClient>()
+          .get(endpoint: AppConstants.favour + (data ?? ''))
+          .then((value) {
+        if (value.isLeft) {
+          return FavourToModel.fromJson(jsonDecode(value.left.body));
+        } else {
+          Fluttertoast.showToast(msg: value.right.toString());
+          return null;
+        }
+      });
+    } catch (e) {
+      throw Exception('Network error: $e');
+    }
+  }
+
+  Future<CasteListModel?> getCasteList(String? data) async {
+    try {
+      return await getIt<APIClient>()
+          .get(endpoint: AppConstants.caste + (data ?? ''))
+          .then((value) {
+        if (value.isLeft) {
+          return CasteListModel.fromJson(jsonDecode(value.left.body));
         } else {
           Fluttertoast.showToast(msg: value.right.toString());
           return null;

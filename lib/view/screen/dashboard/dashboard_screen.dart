@@ -416,88 +416,27 @@ class DashboardScreenState extends State<DashboardScreen> {
                                   ),
                                   alignment: Alignment.bottomLeft,
                                 ),
-                                DashBoardCharts(),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {},
-                                      child: Container(
-                                        width: 40,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(40),
-                                          color: Color(0XFFE1E1E1),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.2),
-                                                spreadRadius: 1,
-                                                blurRadius: 5)
-                                          ],
-                                        ),
-                                        child: Center(
-                                            child: const Icon(
-                                          Icons.chevron_left,
-                                          color: Color(0xFF717171),
-                                          size: 40,
-                                        )),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {},
-                                      child: Container(
-                                        width: 40,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.2),
-                                                  spreadRadius: 1,
-                                                  blurRadius: 5)
-                                            ],
-                                            border: Border.all(
-                                                width: 0.5,
-                                                color: Color(0xFFD8D8D8)),
-                                            borderRadius:
-                                                BorderRadius.circular(40),
-                                            color: Colors.white),
-                                        child: Center(
-                                            child: const Icon(
-                                          Icons.chevron_right,
-                                          color: Colors.black,
-                                          size: 40,
-                                        )),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
+                                const DashBoardCharts(),
+                                const SizedBox(
                                   height: 15,
                                 ),
                                 ImportantPeople(
                                   importantPeopleList:
                                       state.importantPeopleList,
                                 ),
-                                SizedBox(
+                                // const SizedBox(
+                                //   height: 15,
+                                // ),
+                                // const WardIssues(
+                                //   isDashboard: true,
+                                // ),
+                                const SizedBox(
                                   height: 15,
                                 ),
-                                WardIssues(
-                                  isDashboard: true,
+                                TodoList(
+                                  key: UniqueKey(),
                                 ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                TodoList(),
-                                SizedBox(
+                                const SizedBox(
                                   height: 30,
                                 ),
                               ],

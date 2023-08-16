@@ -74,6 +74,7 @@ dependencies:
   table_calendar: ^3.0.9
   dropdown_button2: ^2.3.7
   pie_chart: ^5.3.2
+  syncfusion_flutter_charts: ^22.2.9
 
   #state-management
   flutter_bloc: ^8.1.3

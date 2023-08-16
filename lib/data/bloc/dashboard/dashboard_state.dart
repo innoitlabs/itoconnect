@@ -12,17 +12,20 @@ class DashboardState extends Equatable {
   final CasteListModel casteList;
   final FavourToModel favourToList;
   final List<ImportantPeopleModel> importantPeopleList;
-  const DashboardState(
-      {required this.isLoading,
-      required this.dropdownDetails,
-      required this.selectedConstituencies,
-      required this.selectedMandal,
-      required this.selectedVillages,
-      required this.selectedPollings,
-      required this.voutersCount,
-      required this.casteList,
-      required this.favourToList,
-      required this.importantPeopleList});
+  final List<TodoModel> todoList;
+  const DashboardState({
+    required this.isLoading,
+    required this.dropdownDetails,
+    required this.selectedConstituencies,
+    required this.selectedMandal,
+    required this.selectedVillages,
+    required this.selectedPollings,
+    required this.voutersCount,
+    required this.casteList,
+    required this.favourToList,
+    required this.importantPeopleList,
+    required this.todoList,
+  });
 
   @override
   List<Object> get props => [
@@ -35,32 +38,37 @@ class DashboardState extends Equatable {
         voutersCount,
         casteList,
         favourToList,
-        importantPeopleList
+        importantPeopleList,
+        todoList,
       ];
 
-  DashboardState copyWith(
-          {bool? isLoading,
-          VotersCountModel? voutersCount,
-          CasteListModel? casteList,
-          FavourToModel? favourToList,
-          DashboardModel? dropdownDetails,
-          List<DropdownConstituencyModel>? selectedConstituencies,
-          List<MandalModel>? selectedMandal,
-          List<VillageModal>? selectedVillages,
-          List<PollingModel>? selectedPollings,
-          List<ImportantPeopleModel>? importantPeopleList}) =>
+  DashboardState copyWith({
+    bool? isLoading,
+    VotersCountModel? voutersCount,
+    CasteListModel? casteList,
+    FavourToModel? favourToList,
+    DashboardModel? dropdownDetails,
+    List<DropdownConstituencyModel>? selectedConstituencies,
+    List<MandalModel>? selectedMandal,
+    List<VillageModal>? selectedVillages,
+    List<PollingModel>? selectedPollings,
+    List<ImportantPeopleModel>? importantPeopleList,
+    List<TodoModel>? todoList,
+  }) =>
       DashboardState(
-          isLoading: isLoading ?? this.isLoading,
-          dropdownDetails: dropdownDetails ?? this.dropdownDetails,
-          selectedConstituencies:
-              selectedConstituencies ?? this.selectedConstituencies,
-          selectedMandal: selectedMandal ?? this.selectedMandal,
-          selectedVillages: selectedVillages ?? this.selectedVillages,
-          selectedPollings: selectedPollings ?? this.selectedPollings,
-          voutersCount: voutersCount ?? this.voutersCount,
-          casteList: casteList ?? this.casteList,
-          favourToList: favourToList ?? this.favourToList,
-          importantPeopleList: importantPeopleList ?? this.importantPeopleList);
+        isLoading: isLoading ?? this.isLoading,
+        dropdownDetails: dropdownDetails ?? this.dropdownDetails,
+        selectedConstituencies:
+            selectedConstituencies ?? this.selectedConstituencies,
+        selectedMandal: selectedMandal ?? this.selectedMandal,
+        selectedVillages: selectedVillages ?? this.selectedVillages,
+        selectedPollings: selectedPollings ?? this.selectedPollings,
+        voutersCount: voutersCount ?? this.voutersCount,
+        casteList: casteList ?? this.casteList,
+        favourToList: favourToList ?? this.favourToList,
+        importantPeopleList: importantPeopleList ?? this.importantPeopleList,
+        todoList: todoList ?? this.todoList,
+      );
 
   factory DashboardState.initial() => DashboardState(
         isLoading: false,
@@ -73,5 +81,6 @@ class DashboardState extends Equatable {
         casteList: CasteListModel(),
         favourToList: FavourToModel(),
         importantPeopleList: const [],
+        todoList: const [],
       );
 }

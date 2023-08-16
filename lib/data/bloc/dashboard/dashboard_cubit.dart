@@ -17,6 +17,7 @@ class DashboardCubit extends Cubit<DashboardState> {
     getDashboardDropdownDetails();
     getVotersCount(null);
     getImportantPeople();
+    getTodo();
   }
 
   void reinitialize() {
@@ -55,6 +56,7 @@ class DashboardCubit extends Cubit<DashboardState> {
         ),
       );
     });
+    reinitialize();
   }
 
   void updateSelectedConstituency(
@@ -142,6 +144,14 @@ class DashboardCubit extends Cubit<DashboardState> {
     reinitialize();
   }
 
+  void addTodo(String todo) async {
+    await getIt<APIService>().addTodo(todo).then((value) {
+      if (value) {
+        getTodo();
+      }
+    });
+  }
+
   void getVotersCount(String? data) async {
     await getIt<APIService>().getVotersCount(data).then((value) {
       emit(state.copyWith(voutersCount: value));
@@ -163,6 +173,13 @@ class DashboardCubit extends Cubit<DashboardState> {
   void getImportantPeople() async {
     await getIt<APIService>().getImportantPeopleDetails().then((value) {
       emit(state.copyWith(importantPeopleList: value));
+    });
+  }
+
+  void getTodo() async {
+    await getIt<APIService>().getTodo().then((value) {
+      print('------------lsd $value');
+      emit(state.copyWith(todoList: value));
     });
   }
 }

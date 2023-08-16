@@ -36,13 +36,20 @@ class APIClient {
 
   Future<Either<http.Response, Exception>> post(
       {required String endpoint, Map<String, dynamic>? data}) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    final token = preferences.getString('token');
+
     try {
       final response = await http.post(
         Uri.parse('$baseUrl$endpoint'),
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token'
+        },
         body: jsonEncode(data),
       );
-
+      debugPrint(response.body);
       if (response.statusCode == 200) {
         debugPrint(response.body);
         return Left(response);

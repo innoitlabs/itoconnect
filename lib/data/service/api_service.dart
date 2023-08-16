@@ -258,6 +258,7 @@ class APIService {
           .get(endpoint: AppConstants.caste + (data ?? ''))
           .then((value) {
         if (value.isLeft) {
+          print('---------------caste: ${value.left.body}');
           return CasteListModel.fromJson(jsonDecode(value.left.body));
         } else {
           Fluttertoast.showToast(msg: value.right.toString());
@@ -280,6 +281,52 @@ class APIService {
             importantPeopleList.add(ImportantPeopleModel.fromJson(data));
           }
           return importantPeopleList;
+        } else {
+          Fluttertoast.showToast(msg: value.right.toString());
+          return [];
+        }
+      });
+    } catch (e, s) {
+      debugPrint(s.toString());
+      throw Exception('Network error: $e');
+    }
+  }
+
+  Future<bool> addTodo(String todo) async {
+    debugPrint('value.left.body');
+    try {
+      return await getIt<APIClient>().post(
+          endpoint: AppConstants.todo,
+          data: {'todo_title': todo}).then((value) {
+        if (value.isLeft && (jsonDecode(value.left.body)['status'] ?? false)) {
+          return true;
+        } else {
+          if (value.isLeft) {
+            Fluttertoast.showToast(msg: jsonDecode(value.left.body)['message']);
+          } else {
+            Fluttertoast.showToast(msg: value.right.toString());
+          }
+          return false;
+        }
+      });
+    } catch (e, s) {
+      debugPrint(s.toString());
+      throw Exception('Network error: $e');
+    }
+  }
+
+  Future<List<TodoModel>> getTodo() async {
+    try {
+      return await getIt<APIClient>()
+          .get(endpoint: AppConstants.todo)
+          .then((value) {
+        if (value.isLeft) {
+          print(jsonDecode(value.left.body));
+          List<TodoModel> todoList = [];
+          for (var data in jsonDecode(value.left.body)) {
+            todoList.add(TodoModel.fromJson(data));
+          }
+          return todoList;
         } else {
           Fluttertoast.showToast(msg: value.right.toString());
           return [];

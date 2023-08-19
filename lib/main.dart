@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i2connect/data/bloc/auth/auth_cubit.dart';
 import 'package:i2connect/data/bloc/dashboard/dashboard_cubit.dart';
+import 'package:i2connect/data/bloc/voters_data/voters_data_cubit.dart';
 import 'package:i2connect/data/injection/singleton.dart';
 // import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:i2connect/provider/auth_provider.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthCubit>(create: (context) => AuthCubit()),
+        BlocProvider<VotersDataCubit>(create: (context) => VotersDataCubit()),
         BlocProvider<DashboardCubit>(create: (context) => DashboardCubit())
       ],
       child: MaterialApp(

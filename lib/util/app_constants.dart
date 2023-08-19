@@ -1,8 +1,22 @@
+import 'package:i2connect/model/dashboard/dashboard/dashboard_model.dart';
 
 class AppConstants {
   static const String appName = '12connect';
   static const String appVersion = '1.0';
-  static const String baseUrl = 'https://6valley.6amtech.com';
+  static const String baseUrl = 'https://test-api.itoconnect.online/';
+  static const String signIn = 'signin/';
+  static const String signup = 'signup/';
+  static const String verifyotp = 'verifyotp/';
+  static const String forgotPassword = 'forgotpassword/?data=';
+  static const String votersCount = 'dashboard/voter_count/';
+  static const String caste = 'dashboard/caste/';
+  static const String favour = 'dashboard/favour/';
+  static const String importantPeople = 'dashboard/imp/';
+  static const String todo = 'dashboard/todo/';
+  static const String statesAndRoles = 'dropdown/';
+  static const String districts = 'dropdown/?state_id=';
+  static const String dropdowndb = 'dashboard/dropdowndb/';
+
   static const String userId = 'userId';
   static const String name = 'name';
 
@@ -53,4 +67,36 @@ class AppConstants {
   static const String theme = 'theme';
   static const String topic = 'i2connect';
   static const String userAddress = 'user_address';
+}
+
+String getConstituencyTitle(List<DropdownConstituencyModel> constituencies) {
+  if (constituencies.isNotEmpty) {
+    return '${constituencies.first.mla_constituency_name} ${constituencies.length > 1 ? ' + ${constituencies.length - 1}' : ''}';
+  } else {
+    return 'Select Consituencies';
+  }
+}
+
+String getMandalTitle(List<MandalModel> mandalList) {
+  if (mandalList.isNotEmpty) {
+    return '${mandalList.first.mandal_name} ${mandalList.length > 1 ? ' + ${mandalList.length - 1}' : ''}';
+  } else {
+    return 'Select Mandal';
+  }
+}
+
+String getVillageTitle(List<VillageModal> villages) {
+  if (villages.isNotEmpty) {
+    return '${villages.first.ward_village_name} ${villages.length > 1 ? ' + ${villages.length - 1}' : ''}';
+  } else {
+    return 'Select Village';
+  }
+}
+
+String getPollingTitle(List<PollingModel> pollingList) {
+  if (pollingList.isNotEmpty) {
+    return '${pollingList.first.polling_booth_name} ${pollingList.length > 1 ? ' + ${pollingList.length - 1}' : ''}';
+  } else {
+    return 'Select Polling';
+  }
 }

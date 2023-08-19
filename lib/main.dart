@@ -1,5 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:i2connect/data/bloc/auth/auth_cubit.dart';
+import 'package:i2connect/data/bloc/dashboard/dashboard_cubit.dart';
+import 'package:i2connect/data/injection/singleton.dart';
 // import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:i2connect/provider/auth_provider.dart';
 import 'package:i2connect/provider/splash_provider.dart';
@@ -7,6 +11,7 @@ import 'package:i2connect/provider/theme_provider.dart';
 import 'package:i2connect/theme/dark_theme.dart';
 import 'package:i2connect/theme/light_theme.dart';
 import 'package:i2connect/util/app_constants.dart';
+import 'package:i2connect/view/screen/splash.dart';
 import 'package:provider/provider.dart';
 
 import 'package:i2connect/view/screen/auth/sign_in.dart';
@@ -17,6 +22,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  initSingletons();
   await di.init();
 
   runApp(MultiProvider(
@@ -33,12 +39,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: AppConstants.appName,
-      navigatorKey: navigatorKey,
-      debugShowCheckedModeBanner: false,
-      theme: Provider.of<ThemeProvider>(context).darkTheme ? dark : light,
-      home: const SignInScreen(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthCubit>(create: (context) => AuthCubit()),
+        BlocProvider<DashboardCubit>(create: (context) => DashboardCubit())
+      ],
+      child: MaterialApp(
+        title: AppConstants.appName,
+        navigatorKey: navigatorKey,
+        debugShowCheckedModeBanner: false,
+        theme: Provider.of<ThemeProvider>(context).darkTheme ? dark : light,
+        home: const SplashScreen(),
+      ),
     );
   }
 }

@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:i2connect/model/dashboard/important_people/important_people_model.dart';
 import 'package:i2connect/util/color_resources.dart';
 import 'package:i2connect/util/custom_themes.dart';
 import 'package:i2connect/util/images.dart';
 import 'package:i2connect/view/screen/dashboard/list_full_screen.dart';
 
 class ImportantPeople extends StatelessWidget {
-  final bool isDashboard;
-  const ImportantPeople({Key? key, this.isDashboard = true}) : super(key: key);
+  final List<ImportantPeopleModel> importantPeopleList;
+  const ImportantPeople({Key? key, required this.importantPeopleList})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print(importantPeopleList.length);
     return Container(
       padding: EdgeInsets.only(top: 5),
-      height: this.isDashboard ? 205 : MediaQuery.of(context).size.height * 0.75,
+      height: 205,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
@@ -23,8 +26,7 @@ class ImportantPeople extends StatelessWidget {
                 spreadRadius: 1,
                 blurRadius: 5)
           ],
-          border: Border.all(
-              width: 1, color: Color(0xFFD8D8D8))),
+          border: Border.all(width: 1, color: Color(0xFFD8D8D8))),
       child: Column(
         children: [
           Row(
@@ -35,50 +37,105 @@ class ImportantPeople extends StatelessWidget {
                   'Important People',
                   style: titleTabHeader,
                 ),
-                onTap: (){
-                  if(this.isDashboard == true) {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => const ListFullScreen(screenType: 'ImportantPeople',)));
-                  }
+                onTap: () {
+                  // if(this.isDashboard == true) {
+                  //   Navigator.push(context,
+                  //       MaterialPageRoute(builder: (_) => const ListFullScreen(screenType: 'ImportantPeople',)));
+                  // }
                 },
               ),
-          ],
+            ],
           ),
-          SizedBox(height: 5,),
+          SizedBox(
+            height: 5,
+          ),
           Container(
             height: 35,
             color: Color(0xFFB3C8E8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text("Name", style: TextStyle(fontFamily: 'OpenSans', fontWeight: FontWeight.w700, fontSize: 14, color: Color(0xFF36588C)) ,),
-                Text("Designation", style: TextStyle(fontFamily: 'OpenSans', fontWeight: FontWeight.w700, fontSize: 14, color: Color(0xFF36588C)) ,),
-                Text(" ", style: TextStyle(fontFamily: 'OpenSans', fontWeight: FontWeight.w700, fontSize: 14, color: Color(0xFF36588C)) ,),
+                Text(
+                  "Name",
+                  style: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: Color(0xFF36588C)),
+                ),
+                Text(
+                  "Designation",
+                  style: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: Color(0xFF36588C)),
+                ),
+                Text(
+                  " ",
+                  style: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: Color(0xFF36588C)),
+                ),
               ],
             ),
           ),
-          Container(
-            height: this.isDashboard ? 130 : MediaQuery.of(context).size.height * 0.64,
+          SizedBox(
+            height: 130,
             child: ListView.builder(
-                padding: EdgeInsets.all(0),
-                itemBuilder: (BuildContext context, int index)  {
+                padding: const EdgeInsets.all(0),
+                itemBuilder: (BuildContext context, int index) {
+                  final details = importantPeopleList[index];
                   return Container(
                     height: 40,
+                    width: MediaQuery.of(context).size.width,
                     alignment: Alignment.centerLeft,
                     child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children:[
-                          Text("Vamshi", style: TextStyle(fontFamily: 'OpenSans', fontWeight: FontWeight.w600, fontSize: 14, color: Color(0xFF444444)) ,),
-                          Text("Counsellor", style: TextStyle(fontFamily: 'OpenSans', fontWeight: FontWeight.w600, fontSize: 14, color: Color(0xFF444444)) ,),
-                          SizedBox(width: 5, child: IconButton(onPressed: (){}, icon: const Icon(Icons.call, color: Color(0xFF046A38),))),
-                        ]
-                    ),
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            width: MediaQuery.of(context).size.width / 3,
+                            child: Text(
+                              details.first_name ?? '',
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  fontFamily: 'OpenSans',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                  color: Color(0xFF444444)),
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            width: MediaQuery.of(context).size.width / 3,
+                            alignment: Alignment.center,
+                            child: Text(
+                              details.designation ?? '',
+                              style: const TextStyle(
+                                  fontFamily: 'OpenSans',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                  color: Color(0xFF444444)),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.call,
+                                color: Color(0xFF046A38),
+                              ),
+                            ),
+                          ),
+                        ]),
                   );
                 },
-                itemCount: 10),
+                itemCount: importantPeopleList.length),
           ),
-
-
         ],
       ),
     );

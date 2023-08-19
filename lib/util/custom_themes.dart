@@ -17,6 +17,20 @@ const titleTabHeader = TextStyle(
   color: Color(0xFF444444),
 );
 
+const popupHeader = TextStyle(
+  fontFamily: 'OpenSans',
+  fontWeight: FontWeight.w600,
+  fontSize: 20,
+  color: Color(0xFF1C477A),
+);
+
+const popupText = TextStyle(
+  fontFamily: 'OpenSans',
+  fontWeight: FontWeight.w600,
+  fontSize: 16,
+  color: Color(0xFF444444),
+);
+
 const titleSemiMedium = TextStyle(
   fontFamily: 'ProximaNova',
   fontWeight: FontWeight.w600,

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i2connect/data/bloc/dashboard/dashboard_cubit.dart';
-import 'package:i2connect/model/dashboard/dashboard/dashboard_model.dart';
-import 'package:i2connect/util/color_resources.dart';
 import 'package:i2connect/util/custom_themes.dart';
-import 'package:i2connect/util/images.dart';
 import 'package:i2connect/view/basewidget/textfield/custom_textfield.dart';
 
 class TodoList extends StatefulWidget {

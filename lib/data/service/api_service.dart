@@ -10,6 +10,7 @@ import 'package:i2connect/model/signin/constituency/constituency_model.dart';
 import 'package:i2connect/model/signin/districts/districts_model.dart';
 import 'package:i2connect/model/signin/signin_response_model.dart';
 import 'package:i2connect/model/signin/states_roles/states_roles_model.dart';
+import 'package:i2connect/model/voters_data/voters_data_model.dart';
 import 'package:i2connect/util/app_constants.dart';
 
 class APIService {
@@ -330,6 +331,24 @@ class APIService {
         } else {
           Fluttertoast.showToast(msg: value.right.toString());
           return [];
+        }
+      });
+    } catch (e, s) {
+      debugPrint(s.toString());
+      throw Exception('Network error: $e');
+    }
+  }
+
+  Future<VotersDataResponseModel?> getVotersDetails(String? data) async {
+    try {
+      return await getIt<APIClient>()
+          .get(endpoint: AppConstants.votersData + (data ?? ''))
+          .then((value) {
+        if (value.isLeft) {
+          return VotersDataResponseModel.fromJson(jsonDecode(value.left.body));
+        } else {
+          Fluttertoast.showToast(msg: value.right.toString());
+          return null;
         }
       });
     } catch (e, s) {

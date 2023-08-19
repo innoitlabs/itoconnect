@@ -29,8 +29,8 @@ class SignInScreenState extends State<SignInScreen> {
 
   @override
   void initState() {
-    emailController.text = 'vagdevik@c360soft.ai';
-    passwordController.text = 'Vagdevi@123';
+    emailController.text = 'k.pavankumaar@gmail.com';
+    passwordController.text = 'Pavan@123';
     super.initState();
   }
 

@@ -10,17 +10,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 class CustomAppBar extends StatelessWidget {
   final String? title;
   final bool isBackButtonExist;
-  final IconData? icon;
-  final Function? onActionPressed;
-  final Function? onBackPressed;
+  final Widget? action;
 
   const CustomAppBar(
       {Key? key,
       required this.title,
       this.isBackButtonExist = true,
-      this.icon,
-      this.onActionPressed,
-      this.onBackPressed})
+      this.action})
       : super(key: key);
 
   @override
@@ -53,24 +49,7 @@ class CustomAppBar extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.centerLeft,
-              child: IconButton(
-                icon: const Icon(
-                  Icons.logout,
-                  color: Colors.grey,
-                  size: 32,
-                ),
-                onPressed: () async {
-                  SharedPreferences preferences =
-                      await SharedPreferences.getInstance();
-                  preferences.clear();
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SignInScreen(),
-                      ),
-                      (route) => false);
-                },
-              ),
+              child: action,
             ),
           ],
         ),

@@ -84,7 +84,6 @@ class CustomTextField extends StatelessWidget {
               maxLength: isPhoneNumber ? 15 : null,
               focusNode: focusNode,
               keyboardType: textInputType ?? TextInputType.text,
-              //keyboardType: TextInputType.number,
               enabled: isEnable,
               initialValue: null,
               textInputAction: textInputAction ?? TextInputAction.next,

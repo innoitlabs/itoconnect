@@ -4,6 +4,7 @@ import 'package:i2connect/data/bloc/voters_data/voters_data_cubit.dart';
 import 'package:i2connect/util/images.dart';
 import 'package:i2connect/view/screen/ecampaigns/new_group.dart';
 import 'package:i2connect/view/screen/votersdata/add_or_edit_voter_data.dart';
+import 'package:i2connect/view/screen/votersdata/filters_view.dart';
 
 class VotersDataScreen extends StatefulWidget {
   const VotersDataScreen({Key? key}) : super(key: key);
@@ -13,7 +14,6 @@ class VotersDataScreen extends StatefulWidget {
 }
 
 class VotersDataScreenState extends State<VotersDataScreen> {
-  final dropDownTextController = TextEditingController();
   late VotersDataCubit votersDataState =
       BlocProvider.of<VotersDataCubit>(context);
   final scrollController = ScrollController();
@@ -39,73 +39,15 @@ class VotersDataScreenState extends State<VotersDataScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocConsumer<VotersDataCubit, VotersDataState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           return Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 14.0, vertical: 14.0),
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: SizedBox(
-                        height: 40.0,
-                        width: double.infinity,
-                        child: TextField(
-                          controller: dropDownTextController,
-                          readOnly: true,
-                          decoration: const InputDecoration(
-                            hintText: 'Enter Voter ID Number',
-                            hintStyle: TextStyle(
-                              color: Color(0xFFAEAEAE),
-                              fontFamily: "ProximaNova",
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            contentPadding: EdgeInsets.only(
-                                top: 0.0, left: 14.0, bottom: 10.0),
-                            suffix: Icon(Icons.arrow_drop_down),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xFF0047B2),
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xFF0047B2),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        margin: const EdgeInsets.only(left: 30.0),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 20.0),
-                        decoration: BoxDecoration(
-                            color: const Color(0xFF528BB8),
-                            borderRadius: BorderRadius.circular(2.0)),
-                        child: const Text(
-                          'Filter',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "ProximaNova",
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  padding: const EdgeInsets.only(bottom: 16.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -124,11 +66,18 @@ class VotersDataScreenState extends State<VotersDataScreen> {
                         color: const Color(0xFFCD5642),
                         image: Images.pdf,
                       ),
-                      // VoterDataOptionsWidget(
-                      //   onTap: () {},
-                      //   color: const Color(0xFF56BDEA),
-                      //   image: Images.settings,
-                      // ),
+                      VoterDataOptionsWidget(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const VoterDataFilterView(),
+                            ),
+                          );
+                        },
+                        color: const Color(0xFF56BDEA),
+                        image: Images.filterImage,
+                      ),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(

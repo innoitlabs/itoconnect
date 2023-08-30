@@ -19,6 +19,7 @@ class APIClient {
       'Authorization': 'Bearer $token'
     };
     try {
+      print('-----------${'Bearer $token'}');
       final response =
           await http.get(Uri.parse('$baseUrl$endpoint'), headers: headers);
       debugPrint('${response.request?.url}');
@@ -38,7 +39,8 @@ class APIClient {
       {required String endpoint, Map<String, dynamic>? data}) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     final token = preferences.getString('token');
-
+    print('Bearer $token');
+    print(data);
     try {
       final response = await http.post(
         Uri.parse('$baseUrl$endpoint'),

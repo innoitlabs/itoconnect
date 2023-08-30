@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i2connect/data/bloc/auth/auth_cubit.dart';
-import 'package:i2connect/util/color_resources.dart';
 import 'package:i2connect/util/custom_themes.dart';
 import 'package:i2connect/provider/theme_provider.dart';
 import 'package:i2connect/util/dimensions.dart';
@@ -13,7 +12,6 @@ import 'package:i2connect/view/screen/mainscreen/mainscreen.dart';
 import 'package:provider/provider.dart';
 import 'forgot_password.dart';
 import 'sign_up.dart';
-import 'package:i2connect/view/screen/dashboard/dashboard_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -48,9 +46,7 @@ class SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocConsumer<AuthCubit, AuthState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           return Stack(
             children: [
@@ -72,9 +68,7 @@ class SignInScreenState extends State<SignInScreen> {
                     width: 100,
                   ),
                   const SizedBox(height: 50),
-                  Container(
-                    child: Text('Login', style: titleHeader),
-                  ),
+                  const Text('Login', style: titleHeader),
                   Expanded(
                       child: Padding(
                     padding: const EdgeInsets.symmetric(

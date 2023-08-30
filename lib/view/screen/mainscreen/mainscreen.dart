@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:i2connect/view/basewidget/custom_app_bar.dart';
+import 'package:i2connect/view/screen/auth/sign_in.dart';
 import 'package:i2connect/view/screen/dashboard/dashboard_screen.dart';
 import 'package:i2connect/view/screen/ecampaigns/ecampaigns_screen.dart';
 import 'package:i2connect/view/screen/calendar/calendar_screen.dart';
+import 'package:i2connect/view/screen/votersdata/search_voter.dart';
 import 'package:i2connect/view/screen/votersdata/votersdata_screen.dart';
 import 'package:i2connect/view/screen/birthdays/birthdays_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../util/color_resources.dart';
 
 class MainScreenView extends StatefulWidget {
@@ -81,6 +84,52 @@ class _MainScreenViewState extends State<MainScreenView> {
     }
   }
 
+  Widget getAction() {
+    switch (_selectedIndex) {
+      case 0:
+        return IconButton(
+          icon: const Icon(
+            Icons.logout,
+            color: Colors.grey,
+            size: 32,
+          ),
+          onPressed: () async {
+            SharedPreferences preferences =
+                await SharedPreferences.getInstance();
+            preferences.clear().then((value) => Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SignInScreen(),
+                ),
+                (route) => false));
+          },
+        );
+      case 1:
+        return const SizedBox.shrink();
+      case 2:
+        return const SizedBox.shrink();
+      case 3:
+        return IconButton(
+            icon: const Icon(
+              Icons.search,
+              color: Colors.grey,
+              size: 32,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SearchVoterView(),
+                ),
+              );
+            });
+      case 4:
+        return const SizedBox.shrink();
+      default:
+        return const SizedBox.shrink();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,7 +147,10 @@ class _MainScreenViewState extends State<MainScreenView> {
 
       body: Column(
         children: [
-          CustomAppBar(title: getTitle()),
+          CustomAppBar(
+            title: getTitle(),
+            action: getAction(),
+          ),
           Expanded(child: getBody()),
         ],
       ),

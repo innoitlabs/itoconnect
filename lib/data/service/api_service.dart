@@ -356,4 +356,46 @@ class APIService {
       throw Exception('Network error: $e');
     }
   }
+
+  Future<VoterDataModel?> searchVoterDetails(String voterId) async {
+    try {
+      return await getIt<APIClient>()
+          .get(endpoint: AppConstants.searchVoterById + voterId)
+          .then((value) {
+        if (value.isLeft) {
+          final data = jsonDecode(value.left.body)['message'];
+          if (data != null) {
+            return VoterDataModel.fromJson(data);
+          } else {
+            return null;
+          }
+        } else {
+          Fluttertoast.showToast(msg: value.right.toString());
+          return null;
+        }
+      });
+    } catch (e, s) {
+      debugPrint(s.toString());
+      throw Exception('Network error: $e');
+    }
+  }
+
+  Future<bool> saveVotersDetails({required VoterDataModel voterData}) async {
+    try {
+      return await getIt<APIClient>()
+          .post(endpoint: AppConstants.addVoter, data: voterData.toJson())
+          .then((value) {
+        print(value.left.statusCode);
+        print(value.left.body);
+        if (value.isLeft) {
+          return true;
+        } else {
+          Fluttertoast.showToast(msg: value.right.toString());
+          return false;
+        }
+      });
+    } catch (e) {
+      throw Exception('Network error: $e');
+    }
+  }
 }

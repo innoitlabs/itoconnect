@@ -166,8 +166,9 @@ class DashboardScreenState extends State<DashboardScreen> {
                                 ),
                               ),
                               Container(
-                                margin: const EdgeInsets.only(
-                                    bottom: Dimensions.marginSizeSmall),
+                                margin: const EdgeInsets.symmetric(
+                                  horizontal: Dimensions.marginSizeSmall,
+                                ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [

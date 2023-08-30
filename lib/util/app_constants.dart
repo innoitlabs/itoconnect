@@ -13,6 +13,8 @@ class AppConstants {
   static const String favour = 'dashboard/favour/';
   static const String importantPeople = 'dashboard/imp/';
   static const String votersData = 'dashboard/votersdata/?page=';
+  static const String searchVoterById = 'dashboard/checkvoter/?voter_id=';
+  static const String addVoter = 'dashboard/addvoters/';
   static const String todo = 'dashboard/todo/';
   static const String statesAndRoles = 'dropdown/';
   static const String districts = 'dropdown/?state_id=';

@@ -6,9 +6,11 @@ part 'signin_response_model.g.dart';
 class SignInResponseModel {
   bool? status;
   UserDataModel? userData;
-  String? token;
+  RoleDataModel? roleData;
+  String? access;
+  String? refresh;
 
-  SignInResponseModel({this.status, this.userData, this.token});
+  SignInResponseModel({this.status, this.userData, this.roleData, this.access, this.refresh});
 
   factory SignInResponseModel.fromJson(Map<String, dynamic> json) =>
       _$SignInResponseModelFromJson(json);
@@ -42,4 +44,21 @@ class UserDataModel {
       _$UserDataModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserDataModelToJson(this);
+}
+
+@JsonSerializable()
+class RoleDataModel {
+  String? rolePermissions;
+
+  RoleDataModel({this.rolePermissions});
+
+  RoleDataModel.fromJson(Map<String, dynamic> json) {
+    rolePermissions = json['role_permissions'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['role_permissions'] = this.rolePermissions;
+    return data;
+  }
 }

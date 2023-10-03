@@ -12,7 +12,11 @@ SignInResponseModel _$SignInResponseModelFromJson(Map<String, dynamic> json) =>
       userData: json['userData'] == null
           ? null
           : UserDataModel.fromJson(json['userData'] as Map<String, dynamic>),
-      token: json['token'] as String?,
+      roleData: json['roleData'] == null
+          ? null
+          : RoleDataModel.fromJson(json['roleData'] as Map<String, dynamic>),
+      access: json['access'] as String?,
+      refresh: json['refresh'] as String?,
     );
 
 Map<String, dynamic> _$SignInResponseModelToJson(
@@ -20,7 +24,9 @@ Map<String, dynamic> _$SignInResponseModelToJson(
     <String, dynamic>{
       'status': instance.status,
       'userData': instance.userData,
-      'token': instance.token,
+      'roleData': instance.roleData,
+      'access': instance.access,
+      'refresh': instance.refresh,
     };
 
 UserDataModel _$UserDataModelFromJson(Map<String, dynamic> json) =>
@@ -47,4 +53,14 @@ Map<String, dynamic> _$UserDataModelToJson(UserDataModel instance) =>
       'state': instance.state,
       'dist': instance.dist,
       'role': instance.role,
+    };
+
+RoleDataModel _$RoleDataModelFromJson(Map<String, dynamic> json) =>
+    RoleDataModel(
+      rolePermissions: json['rolePermissions'] as String?,
+    );
+
+Map<String, dynamic> _$RoleDataModelToJson(RoleDataModel instance) =>
+    <String, dynamic>{
+      'rolePermissions': instance.rolePermissions,
     };

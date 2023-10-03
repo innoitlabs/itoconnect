@@ -34,7 +34,7 @@ class APIService {
     final passwordEncrypted = '$encodedPassword$encodePasswordKey';
 
     try {
-      return await getIt<APIClient>().post(
+      return await getIt<APIClient>().postAuth(
           endpoint: AppConstants.signIn,
           data: {
             'email': emailEncrypted,

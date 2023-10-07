@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i2connect/data/bloc/voters_data/voters_data_cubit.dart';
+import 'package:i2connect/model/voters_data/voters_data_model.dart';
 import 'package:i2connect/util/images.dart';
-import 'package:i2connect/view/screen/ecampaigns/new_group.dart';
 import 'package:i2connect/view/screen/votersdata/add_or_edit_voter_data.dart';
 import 'package:i2connect/view/screen/votersdata/filters_view.dart';
 
@@ -84,7 +84,7 @@ class VotersDataScreenState extends State<VotersDataScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  const AddOrEditVoterDataView(forEdit: false),
+                                  AddOrEditVoterDataView(forEdit: false, editVoter: state.votersData[0],),
                             ),
                           );
                         },
@@ -189,9 +189,9 @@ class VotersDataScreenState extends State<VotersDataScreen> {
                                                             context,
                                                             MaterialPageRoute(
                                                               builder: (context) =>
-                                                                  const AddOrEditVoterDataView(
+                                                                  AddOrEditVoterDataView(
                                                                       forEdit:
-                                                                          true),
+                                                                          true, editVoter: votersData),
                                                             ),
                                                           );
                                                         },

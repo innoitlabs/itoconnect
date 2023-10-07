@@ -54,12 +54,17 @@ class VotersDataCubit extends Cubit<VotersDataState> {
     return getIt<APIService>().saveVotersDetails(voterData: voterData);
   }
 
+  Future<bool> updateVoterData(VoterDataModel voterData) async {
+    return getIt<APIService>().updateVotersDetails(voterData: voterData);
+  }
+
   searchVoter(String voterId) async {
     try {
       await getIt<APIService>().searchVoterDetails(voterId).then((value) {
         emit(state.copyWith(searchVoterData: value));
       });
     } catch (e) {
+      //debugPrint(e.toString());
       debugPrint('unable to fetch $currentPage page voters data');
     }
   }

@@ -101,6 +101,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(state.copyWith(isLoading: false));
       if (value != null) {
         preferences.setString('token', value.access ?? "");
+        preferences.setString('refresh', value.refresh ?? "");
         return true;
       } else {
         return false;

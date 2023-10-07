@@ -10,8 +10,10 @@ import 'package:i2connect/model/signin/constituency/constituency_model.dart';
 import 'package:i2connect/model/signin/districts/districts_model.dart';
 import 'package:i2connect/model/signin/signin_response_model.dart';
 import 'package:i2connect/model/signin/states_roles/states_roles_model.dart';
-import 'package:i2connect/model/voters_data/voters_data_model.dart';
+import '../../model/voters_data/voters_data_model.dart';
 import 'package:i2connect/util/app_constants.dart';
+
+
 
 class APIService {
   APIService();
@@ -365,7 +367,7 @@ class APIService {
         if (value.isLeft) {
           final data = jsonDecode(value.left.body)['message'];
           if (data != null) {
-            return VoterDataModel.fromJson(data);
+            return VoterDataModel.fromJson(data[0]);
           } else {
             return null;
           }
@@ -382,11 +384,32 @@ class APIService {
 
   Future<bool> saveVotersDetails({required VoterDataModel voterData}) async {
     try {
+      print(voterData.toJson());
       return await getIt<APIClient>()
-          .post(endpoint: AppConstants.addVoter, data: voterData.toJson())
+          .post(endpoint: AppConstants.addVoter, data:  voterData.toJson())
           .then((value) {
         print(value.left.statusCode);
-        print(value.left.body);
+        print(jsonEncode(value.left.body));
+        if (value.isLeft) {
+          return true;
+        } else {
+          Fluttertoast.showToast(msg: value.right.toString());
+          return false;
+        }
+      });
+    } catch (e) {
+      throw Exception('Network error: $e');
+    }
+  }
+
+  Future<bool> updateVotersDetails({required VoterDataModel voterData}) async {
+    try {
+      print(voterData.toJson());
+      return await getIt<APIClient>()
+          .patch(endpoint: AppConstants.addVoter, data:  voterData.toJson())
+          .then((value) {
+        print(value.left.statusCode);
+        print(jsonEncode(value.left.body));
         if (value.isLeft) {
           return true;
         } else {
@@ -399,3 +422,5 @@ class APIService {
     }
   }
 }
+
+

@@ -51,7 +51,7 @@ class _SearchVoterViewState extends State<SearchVoterView> {
                       ),
                     ),
                   ),
-                  onChanged: (value) {
+                  onSubmitted: (value) {
                     BlocProvider.of<VotersDataCubit>(context)
                         .searchVoter(value);
                   },
@@ -64,6 +64,7 @@ class _SearchVoterViewState extends State<SearchVoterView> {
       body: BlocConsumer<VotersDataCubit, VotersDataState>(
         listener: (context, state) {},
         builder: (context, state) {
+          print(state.searchVoterData.voterId);
           if (state.searchVoterData.voterId != null) {
             final votersData = state.searchVoterData;
             return Column(

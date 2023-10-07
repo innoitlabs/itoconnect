@@ -6,6 +6,7 @@ class AppConstants {
   static const String baseUrl = 'https://test-api.itoconnect.online/';
   static const String signIn = 'signin/';
   static const String signup = 'signup/';
+  static const String refreshToken = 'jwt/refresh/';
   static const String verifyotp = 'verifyotp/';
   static const String forgotPassword = 'forgotpassword/?data=';
   static const String votersCount = 'dashboard/voter_count/';

@@ -543,6 +543,7 @@ class DashboardPopupWidget extends StatelessWidget {
               ),
               SizedBox(
                 height: 300,
+                width: 300,
                 child: ListView.builder(
                   itemCount: state.dropdownDetails.constituencies?.length,
                   itemBuilder: (context, index) {
@@ -600,6 +601,7 @@ class DashboardPopupWidget extends StatelessWidget {
               ),
               SizedBox(
                 height: 300,
+                width: 300,
                 child: ListView.builder(
                   itemCount: segredatedMandalList.length,
                   itemBuilder: (context, index) {
@@ -655,6 +657,7 @@ class DashboardPopupWidget extends StatelessWidget {
               ),
               SizedBox(
                 height: 300,
+                width: 300,
                 child: ListView.builder(
                   itemCount: segredatedVillageList.length,
                   itemBuilder: (context, index) {
@@ -711,6 +714,7 @@ class DashboardPopupWidget extends StatelessWidget {
               ),
               SizedBox(
                 height: 300,
+                width: 300,
                 child: ListView.builder(
                   itemCount: segredatedPollingList.length,
                   itemBuilder: (context, index) {

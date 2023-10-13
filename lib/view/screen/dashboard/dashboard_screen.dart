@@ -399,11 +399,12 @@ class DashboardScreenState extends State<DashboardScreen> {
                                           width: 80,
                                           height: 38,
                                           radius: 5,
-                                          onTap: () => Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (_) =>
-                                                      const DashboardScreen())),
+                                          onTap: () => print('Filter'),
+                                              // Navigator.push(
+                                              // context,
+                                              // MaterialPageRoute(
+                                              //     builder: (_) =>
+                                              //         const DashboardScreen())),
                                         ),
                                       ),
                                     ],
@@ -422,15 +423,16 @@ class DashboardScreenState extends State<DashboardScreen> {
                                   height: 15,
                                 ),
                                 ImportantPeople(
+                                  isDashboard: true,
                                   importantPeopleList:
                                       state.importantPeopleList,
                                 ),
-                                // const SizedBox(
-                                //   height: 15,
-                                // ),
-                                // const WardIssues(
-                                //   isDashboard: true,
-                                // ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                const WardIssues(
+                                  isDashboard: true,
+                                ),
                                 const SizedBox(
                                   height: 15,
                                 ),

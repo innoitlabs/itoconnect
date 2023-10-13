@@ -74,6 +74,39 @@ class APIClient {
     }
   }
 
+  Future<Either<http.Response, Exception>> delete(
+      {required String endpoint, Map<String, dynamic>? data}) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    final token = preferences.getString('token');
+    print('Bearer $token');
+    print(jsonEncode(data));
+    try {
+      final response = await http.delete(
+        Uri.parse('$baseUrl$endpoint'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token'
+        },
+        body: jsonEncode(data),
+      );
+      debugPrint(response.body);
+      if (response.statusCode == 200) {
+        debugPrint(response.body);
+        return Left(response);
+      } else {
+        if(response.statusCode == 401){
+          if(jsonDecode(response.body)['code'] == 'token_not_valid'){
+            await refreshToken(endpoint: AppConstants.refreshToken);
+          }
+        }
+        return Right(Exception(jsonDecode(response.body)['message']));
+      }
+    } catch (e) {
+      return Right(Exception('Network error: $e'));
+    }
+  }
+
   Future<Either<http.Response, Exception>> patch(
       {required String endpoint, Map<String, dynamic>? data}) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();

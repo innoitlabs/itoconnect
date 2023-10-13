@@ -89,6 +89,7 @@ class _TodoListState extends State<TodoList> {
               ),
               SizedBox(
                 height: 115,
+                width: MediaQuery.of(context).size.width,
                 child: ListView.builder(
                   padding: const EdgeInsets.all(0),
                   itemBuilder: (BuildContext context, int index) {
@@ -101,16 +102,28 @@ class _TodoListState extends State<TodoList> {
                             width: 1, color: const Color(0xFFD8D8D8)),
                       ),
                       height: 40,
-                      alignment: Alignment.centerLeft,
-                      child: Row(children: [
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
                         Text(
-                          state.todoList[index].todoTitle ?? '',
-                          style: const TextStyle(
-                              fontFamily: 'OpenSans',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14,
-                              color: Color(0xFF444444)),
-                        ),
+                              state.todoList[index].todoTitle ?? '',
+                              style: const TextStyle(
+                                  fontFamily: 'OpenSans',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                  color: Color(0xFF444444)),
+                            ),
+                            IconButton(
+                              icon: const Icon(
+                                Icons.delete,
+                                color: Color(0xFFC0534F),
+                              ),
+                              onPressed: (){
+                              BlocProvider.of<DashboardCubit>(context)
+                                  .deleteTodo(state.todoList[index].todoId ?? 0);
+                                todoController.clear();
+                              },
+                            ),
                       ]),
                     );
                   },

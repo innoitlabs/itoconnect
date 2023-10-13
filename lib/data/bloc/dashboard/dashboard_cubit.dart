@@ -152,6 +152,14 @@ class DashboardCubit extends Cubit<DashboardState> {
     });
   }
 
+  void deleteTodo(int todoId) async {
+    await getIt<APIService>().deleteTodo(todoId).then((value) {
+      if (value) {
+        getTodo();
+      }
+    });
+  }
+
   void getVotersCount(String? data) async {
     await getIt<APIService>().getVotersCount(data).then((value) {
       emit(state.copyWith(voutersCount: value));

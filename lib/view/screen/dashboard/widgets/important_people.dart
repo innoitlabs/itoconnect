@@ -1,21 +1,36 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:i2connect/model/dashboard/important_people/important_people_model.dart';
 import 'package:i2connect/util/color_resources.dart';
 import 'package:i2connect/util/custom_themes.dart';
 import 'package:i2connect/util/images.dart';
 import 'package:i2connect/view/screen/dashboard/list_full_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ImportantPeople extends StatelessWidget {
   final List<ImportantPeopleModel> importantPeopleList;
-  const ImportantPeople({Key? key, required this.importantPeopleList})
+  final bool isDashboard;
+  const ImportantPeople({Key? key, required this.isDashboard, required this.importantPeopleList})
       : super(key: key);
+
+  launchDialer(int number) async {
+    Uri url = Uri.parse('tel:$number');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Application unable to open dialer.';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     print(importantPeopleList.length);
+    var heightContainer = isDashboard ? 0.29 : 0.8;
+    var heightList = isDashboard ? 0.18 : 0.69;
     return Container(
       padding: EdgeInsets.only(top: 5),
-      height: 205,
+      height: MediaQuery.of(context).size.height * heightContainer,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
@@ -38,10 +53,10 @@ class ImportantPeople extends StatelessWidget {
                   style: titleTabHeader,
                 ),
                 onTap: () {
-                  // if(this.isDashboard == true) {
-                  //   Navigator.push(context,
-                  //       MaterialPageRoute(builder: (_) => const ListFullScreen(screenType: 'ImportantPeople',)));
-                  // }
+                  if(this.isDashboard == true) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => ListFullScreen(screenType: 'ImportantPeople', importantPeopleList: importantPeopleList,)));
+                  }
                 },
               ),
             ],
@@ -83,7 +98,7 @@ class ImportantPeople extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 130,
+            height: MediaQuery.of(context).size.height * heightList,
             child: ListView.builder(
                 padding: const EdgeInsets.all(0),
                 itemBuilder: (BuildContext context, int index) {
@@ -122,9 +137,12 @@ class ImportantPeople extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            width: 5,
-                            child: IconButton(
-                              onPressed: () {},
+                            width: 20,
+                            child: new IconButton(
+                              onPressed: (){
+                                print("launchDialer");
+                                launchDialer(details.phone_no);
+                                },
                               icon: const Icon(
                                 Icons.call,
                                 color: Color(0xFF046A38),

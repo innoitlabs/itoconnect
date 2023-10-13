@@ -318,6 +318,28 @@ class APIService {
     }
   }
 
+  Future<bool> deleteTodo(int todoId) async {
+    debugPrint('value.left.body $todoId');
+    try {
+      return await getIt<APIClient>().delete(
+          endpoint: '${AppConstants.todo}?id=$todoId').then((value) {
+        if (value.isLeft && (jsonDecode(value.left.body)['status'] ?? false)) {
+          return true;
+        } else {
+          if (value.isLeft) {
+            Fluttertoast.showToast(msg: jsonDecode(value.left.body)['message']);
+          } else {
+            Fluttertoast.showToast(msg: value.right.toString());
+          }
+          return false;
+        }
+      });
+    } catch (e, s) {
+      debugPrint(s.toString());
+      throw Exception('Network error: $e');
+    }
+  }
+
   Future<List<TodoModel>> getTodo() async {
     try {
       return await getIt<APIClient>()

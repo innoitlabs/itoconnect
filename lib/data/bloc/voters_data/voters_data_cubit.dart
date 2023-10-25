@@ -11,13 +11,33 @@ part 'voters_data_state.dart';
 class VotersDataCubit extends Cubit<VotersDataState> {
   VotersDataCubit() : super(VotersDataState.initial());
   int currentPage = 0;
+  var selectedConstuencyIds = [];
+  var selectedMandalIds = [];
+  var selectedWardVillageIds = [];
+  var selectedPollingBoothIds = [];
 
   void initialize() async {
     currentPage = 1;
+
     emit(state.copyWith(isLoading: true));
     getDashboardDropdownDetails();
+    final selectedMandalIds =
+    state.selectedMandal.map((e) => e.mandal_id).toList();
+    final selectedVillagesIds =
+    state.selectedVillages.map((e) => e.ward_village_id).toList();
+    final selectedPollingIds =
+    state.selectedPollings.map((e) => e.polling_booth_id).toList();
+    final selectedMandalIdsStr = selectedMandalIds.isNotEmpty
+        ? '&mandal_id=${selectedMandalIds.toString().replaceFirst('[', '').replaceFirst(']', '').replaceAll(' ', '')}'
+        : '';
+    final selectedVillagesIdsStr = selectedVillagesIds.isNotEmpty
+        ? '&ward_village_id=${selectedVillagesIds.toString().replaceFirst('[', '').replaceFirst(']', '').replaceAll(' ', '')}'
+        : '';
+    final selectedPollingIdsStr = selectedPollingIds.isNotEmpty
+        ? '&polling_booth=${selectedPollingIds.toString().replaceFirst('[', '').replaceFirst(']', '').replaceAll(' ', '')}'
+        : '';
     try {
-      await getIt<APIService>().getVotersDetails('$currentPage').then((value) =>
+      await getIt<APIService>().getVotersDetails(currentPage,selectedMandalIdsStr,selectedVillagesIdsStr,selectedPollingIdsStr).then((value) =>
           emit(state.copyWith(isLoading: false, votersData: value?.results)));
       currentPage++;
     } catch (e) {
@@ -37,8 +57,25 @@ class VotersDataCubit extends Cubit<VotersDataState> {
   }
 
   void getMoreVotersData() async {
+    // final selectedConstituenciesIds =
+    // state.selectedConstituencies.map((e) => e.constituency_id).toList();
+    final selectedMandalIds =
+    state.selectedMandal.map((e) => e.mandal_id).toList();
+    final selectedVillagesIds =
+    state.selectedVillages.map((e) => e.ward_village_id).toList();
+    final selectedPollingIds =
+    state.selectedPollings.map((e) => e.polling_booth_id).toList();
+    final selectedMandalIdsStr = selectedMandalIds.isNotEmpty
+        ? '&mandal_id=${selectedMandalIds.toString().replaceFirst('[', '').replaceFirst(']', '').replaceAll(' ', '')}'
+        : '';
+    final selectedVillagesIdsStr = selectedVillagesIds.isNotEmpty
+        ? '&ward_village_id=${selectedVillagesIds.toString().replaceFirst('[', '').replaceFirst(']', '').replaceAll(' ', '')}'
+        : '';
+    final selectedPollingIdsStr = selectedPollingIds.isNotEmpty
+        ? '&polling_booth=${selectedPollingIds.toString().replaceFirst('[', '').replaceFirst(']', '').replaceAll(' ', '')}'
+        : '';
     try {
-      await getIt<APIService>().getVotersDetails('$currentPage').then((value) {
+      await getIt<APIService>().getVotersDetails(currentPage, selectedMandalIdsStr, selectedVillagesIdsStr, selectedPollingIdsStr).then((value) {
         List<VoterDataModel> votersData = [];
         votersData.addAll(state.votersData);
         votersData.addAll(value?.results ?? []);
@@ -58,11 +95,28 @@ class VotersDataCubit extends Cubit<VotersDataState> {
     return getIt<APIService>().updateVotersDetails(voterData: voterData);
   }
 
+  Future<bool> deleteVoter(String voterId) async {
+    return getIt<APIService>().deleteVoter(voterId: voterId);
+  }
+
   searchVoter(String voterId) async {
     try {
       await getIt<APIService>().searchVoterDetails(voterId).then((value) {
         emit(state.copyWith(searchVoterData: value));
       });
+    } catch (e) {
+      //debugPrint(e.toString());
+      debugPrint('unable to fetch $currentPage page voters data');
+    }
+  }
+
+  clearSearchVoter(String voterId) async {
+    print(voterId);
+    try {
+      if(voterId == ""){
+        emit(state.copyWith(searchVoterData: null));
+      }
+      print(state.searchVoterData.voterId);
     } catch (e) {
       //debugPrint(e.toString());
       debugPrint('unable to fetch $currentPage page voters data');
@@ -95,6 +149,8 @@ class VotersDataCubit extends Cubit<VotersDataState> {
   }
 
   void updateSelectedMandals(MandalModel mandal, bool add) {
+    print(mandal.mandal_name);
+    print(add);
     if (add) {
       List<MandalModel> data = [];
       data.addAll(state.selectedMandal);
@@ -107,7 +163,8 @@ class VotersDataCubit extends Cubit<VotersDataState> {
     } else {
       List<MandalModel> data = [];
       data.addAll(state.selectedMandal);
-      data.remove(mandal);
+      data.removeWhere((item) => item.mandal_id == mandal.mandal_id);
+      //data.remove(mandal);
       emit(state.copyWith(
         selectedMandal: data,
         selectedVillages: [],
@@ -128,7 +185,8 @@ class VotersDataCubit extends Cubit<VotersDataState> {
     } else {
       List<VillageModal> data = [];
       data.addAll(state.selectedVillages);
-      data.remove(village);
+      data.removeWhere((item) => item.ward_village_id == village.ward_village_id);
+      //data.remove(village);
       emit(state.copyWith(
         selectedVillages: data,
         selectedPollings: [],
@@ -145,7 +203,8 @@ class VotersDataCubit extends Cubit<VotersDataState> {
     } else {
       List<PollingModel> data = [];
       data.addAll(state.selectedPollings);
-      data.remove(polling);
+      data.removeWhere((item) => item.polling_booth_id == polling.polling_booth_id);
+      //data.remove(polling);
       emit(state.copyWith(selectedPollings: data));
     }
   }

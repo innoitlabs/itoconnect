@@ -363,10 +363,25 @@ class APIService {
     }
   }
 
-  Future<VotersDataResponseModel?> getVotersDetails(String? data) async {
+  Future<VotersDataResponseModel?> getVotersDetails(int page, String mandalId, String wardVillageId, String pollingBooth) async {
     try {
+
+      var params = '$page';
+      if(pollingBooth!=''){
+        params = '$params$pollingBooth';
+      }
+      else if(wardVillageId!=''){
+        params = '$params$wardVillageId';
+      }
+      else if(mandalId!=''){
+        params = '$params$mandalId';
+      }
+      else{
+        params = '$page';
+      }
+
       return await getIt<APIClient>()
-          .get(endpoint: AppConstants.votersData + (data ?? ''))
+          .get(endpoint: AppConstants.votersData + (params ?? ''))
           .then((value) {
         if (value.isLeft) {
           return VotersDataResponseModel.fromJson(jsonDecode(value.left.body));
@@ -429,6 +444,24 @@ class APIService {
       print(voterData.toJson());
       return await getIt<APIClient>()
           .patch(endpoint: AppConstants.addVoter, data:  voterData.toJson())
+          .then((value) {
+        print(value.left.statusCode);
+        print(jsonEncode(value.left.body));
+        if (value.isLeft) {
+          return true;
+        } else {
+          Fluttertoast.showToast(msg: value.right.toString());
+          return false;
+        }
+      });
+    } catch (e) {
+      throw Exception('Network error: $e');
+    }
+  }
+  Future<bool> deleteVoter({required String voterId}) async {
+    try {
+      return await getIt<APIClient>()
+          .get(endpoint: '${AppConstants.deleteVoter}?voter_id=${voterId}')
           .then((value) {
         print(value.left.statusCode);
         print(jsonEncode(value.left.body));

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:i2connect/data/injection/singleton.dart';
@@ -5,6 +7,7 @@ import 'package:i2connect/data/service/api_service.dart';
 import 'package:i2connect/model/signin/constituency/constituency_model.dart';
 import 'package:i2connect/model/signin/districts/districts_model.dart';
 import 'package:i2connect/model/signin/states_roles/states_roles_model.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -93,6 +96,8 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<bool> onClickSignIn(
       {required String email, required String password}) async {
+    await _deleteAppDir();
+    await _deleteCacheDir();
     SharedPreferences preferences = await SharedPreferences.getInstance();
     emit(state.copyWith(isLoading: true));
     return await getIt<APIService>()
@@ -107,6 +112,22 @@ class AuthCubit extends Cubit<AuthState> {
         return false;
       }
     });
+  }
+
+  Future<void> _deleteCacheDir() async {
+    Directory tempDir = await getTemporaryDirectory();
+
+    if (tempDir.existsSync()) {
+      tempDir.deleteSync(recursive: true);
+    }
+  }
+
+  Future<void> _deleteAppDir() async {
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+
+    if (appDocDir.existsSync()) {
+      appDocDir.deleteSync(recursive: true);
+    }
   }
 
   Future<bool> onClickSignUp(

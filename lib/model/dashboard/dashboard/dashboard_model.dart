@@ -148,18 +148,26 @@ class CasteModel {
 
 @JsonSerializable()
 class FavourToModel {
-  int? ySRCongress;
-  int? teluguDesam;
-  int? janasena;
-  int? bharatiyaJanathaParty;
-  int? congress;
+  int? tDP;
+  int? bJP;
+  int? iNC;
+  int? tRS;
+  int? cPM;
+  int? iNDP;
+  int? nOTA;
+  int? bRS;
+  int? mIM;
 
   FavourToModel(
-      {this.ySRCongress,
-      this.teluguDesam,
-      this.janasena,
-      this.bharatiyaJanathaParty,
-      this.congress});
+      {this.tDP,
+        this.bJP,
+        this.iNC,
+        this.tRS,
+        this.cPM,
+        this.iNDP,
+        this.nOTA,
+        this.bRS,
+        this.mIM});
 
   factory FavourToModel.fromJson(Map<String, dynamic> json) =>
       _$FavourToModelFromJson(json);

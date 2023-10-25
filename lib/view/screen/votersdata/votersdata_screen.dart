@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:i2connect/data/bloc/voters_data/voters_data_cubit.dart';
 import 'package:i2connect/model/voters_data/voters_data_model.dart';
 import 'package:i2connect/util/images.dart';
@@ -17,6 +18,7 @@ class VotersDataScreenState extends State<VotersDataScreen> {
   late VotersDataCubit votersDataState =
       BlocProvider.of<VotersDataCubit>(context);
   final scrollController = ScrollController();
+  var refresh = '';
 
   @override
   void initState() {
@@ -28,6 +30,16 @@ class VotersDataScreenState extends State<VotersDataScreen> {
       }
     });
     super.initState();
+  }
+
+  void reinitial(){
+    votersDataState.initialize();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        votersDataState.getMoreVotersData();
+      }
+    });
   }
 
   @override
@@ -52,7 +64,7 @@ class VotersDataScreenState extends State<VotersDataScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       VoterDataOptionsWidget(
-                        onTap: () {},
+                        onTap: () { reinitial(); },
                         color: const Color(0xFFE7A03C),
                         image: Images.refresh,
                       ),
@@ -68,12 +80,14 @@ class VotersDataScreenState extends State<VotersDataScreen> {
                       ),
                       VoterDataOptionsWidget(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const VoterDataFilterView(),
-                            ),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => const VoterDataFilterView(),
+                          //     maintainState: false,
+                          //   ),
+                          // );
+                          _navigateAndDisplaySelection(context);
                         },
                         color: const Color(0xFF56BDEA),
                         image: Images.filterImage,
@@ -202,7 +216,34 @@ class VotersDataScreenState extends State<VotersDataScreen> {
                                                         ),
                                                       ),
                                                       IconButton(
-                                                        onPressed: () {},
+                                                        onPressed: () => showDialog<String>(
+                                                          context: context,
+                                                          builder: (BuildContext context) => AlertDialog(
+                                                            title: const Text('Alert'),
+                                                            content: const Text('Do you want to delete this Voter?'),
+                                                            actions: <Widget>[
+                                                              TextButton(
+                                                                onPressed: () => Navigator.pop(context, 'Cancel'),
+                                                                child: const Text('Dismiss'),
+                                                              ),
+                                                              TextButton(
+                                                                onPressed: () async => {
+                                                                await BlocProvider.of<VotersDataCubit>(context)
+                                                                    .deleteVoter(votersData.voterId!)
+                                                                    .then((value) {
+                                                                if (value) {
+                                                                Fluttertoast.showToast(msg: 'Voter Deleted successfully');
+                                                                Navigator.pop(context);
+                                                                } else {
+                                                                Fluttertoast.showToast(msg: 'Failed to delete details');
+                                                                }
+                                                                }),
+                                                                },
+                                                                child: const Text('Confirm'),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
                                                         icon: const Icon(
                                                           Icons.delete,
                                                           color:
@@ -640,6 +681,28 @@ class VotersDataScreenState extends State<VotersDataScreen> {
         },
       ),
     );
+  }
+
+  // A method that launches the SelectionScreen and awaits the result from
+// Navigator.pop.
+  Future<void> _navigateAndDisplaySelection(BuildContext context) async {
+    // Navigator.push returns a Future that completes after calling
+    // Navigator.pop on the Selection Screen.
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const VoterDataFilterView()),
+    );
+
+    // When a BuildContext is used from a StatefulWidget, the mounted property
+    // must be checked after an asynchronous gap.
+    if (!mounted) return;
+
+    print(result);
+    // After the Selection Screen returns a result, hide any previous snackbars
+    // and show the new result.
+    if(result == 'refresh'){
+      reinitial();
+    }
   }
 }
 

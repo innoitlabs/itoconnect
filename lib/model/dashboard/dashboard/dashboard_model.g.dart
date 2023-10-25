@@ -136,18 +136,26 @@ Map<String, dynamic> _$CasteModelToJson(CasteModel instance) =>
 
 FavourToModel _$FavourToModelFromJson(Map<String, dynamic> json) =>
     FavourToModel(
-      ySRCongress: json['ySRCongress'] as int?,
-      teluguDesam: json['teluguDesam'] as int?,
-      janasena: json['janasena'] as int?,
-      bharatiyaJanathaParty: json['bharatiyaJanathaParty'] as int?,
-      congress: json['congress'] as int?,
+      tDP: json['tDP'] as int?,
+      bJP: json['bJP'] as int?,
+      iNC: json['iNC'] as int?,
+      tRS: json['tRS'] as int?,
+      cPM: json['cPM'] as int?,
+      iNDP: json['iNDP'] as int?,
+      nOTA: json['nOTA'] as int?,
+      bRS: json['bRS'] as int?,
+      mIM: json['mIM'] as int?,
     );
 
 Map<String, dynamic> _$FavourToModelToJson(FavourToModel instance) =>
     <String, dynamic>{
-      'ySRCongress': instance.ySRCongress,
-      'teluguDesam': instance.teluguDesam,
-      'janasena': instance.janasena,
-      'bharatiyaJanathaParty': instance.bharatiyaJanathaParty,
-      'congress': instance.congress,
+      'tDP': instance.tDP,
+      'bJP': instance.bJP,
+      'iNC': instance.iNC,
+      'tRS': instance.tRS,
+      'cPM': instance.cPM,
+      'iNDP': instance.iNDP,
+      'nOTA': instance.nOTA,
+      'bRS': instance.bRS,
+      'mIM': instance.mIM,
     };

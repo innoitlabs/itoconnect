@@ -3,7 +3,10 @@ import 'package:either_dart/either.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:i2connect/util/app_constants.dart';
+import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../view/screen/auth/sign_in.dart';
 
 class APIClient {
   final String baseUrl;
@@ -196,6 +199,14 @@ class APIClient {
         preferences.setString('token', accessData ?? "");
         return Left(response);
       } else {
+        SharedPreferences preferences =
+        await SharedPreferences.getInstance();
+        preferences.clear().then((value) => Navigator.pushAndRemoveUntil(
+            context as BuildContext,
+            MaterialPageRoute(
+              builder: (context) => const SignInScreen(),
+            ),
+                (route) => false));
         return Right(Exception(jsonDecode(response.body)['message']));
       }
     } catch (e) {

@@ -1,9 +1,10 @@
 import 'package:i2connect/model/dashboard/dashboard/dashboard_model.dart';
 
 class AppConstants {
-  static const String appName = '12connect';
-  static const String appVersion = '1.0';
+  static const String appName = 'itoconnect';
+  static const String appVersion = '1.0.1';
   static const String baseUrl = 'https://test-api.itoconnect.online/';
+  //static const String baseUrl = 'https://server.itoconnect.online/';
   static const String signIn = 'signin/';
   static const String signup = 'signup/';
   static const String refreshToken = 'jwt/refresh/';
@@ -16,6 +17,7 @@ class AppConstants {
   static const String votersData = 'dashboard/votersdata/?page=';
   static const String searchVoterById = 'dashboard/checkvoter/?voter_id=';
   static const String addVoter = 'dashboard/addvoters/';
+  static const String deleteVoter = 'dashboard/deletevoter/';
   static const String todo = 'dashboard/todo/';
   static const String statesAndRoles = 'dropdown/';
   static const String districts = 'dropdown/?state_id=';

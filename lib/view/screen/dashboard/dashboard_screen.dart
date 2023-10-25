@@ -312,27 +312,27 @@ class DashboardScreenState extends State<DashboardScreen> {
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  Container(
-                                    alignment: Alignment.bottomRight,
-                                    child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          InkWell(
-                                            child: const Text(
-                                              "View as Chart",
-                                              style: TextStyle(
-                                                fontFamily: 'ProximaNova',
-                                                fontSize: 13,
-                                                color: Color(0xFF0047B2),
-                                                decoration:
-                                                    TextDecoration.underline,
-                                              ),
-                                            ),
-                                            onTap: () => print("View as Chart"),
-                                          ),
-                                        ]),
-                                  ),
+                                  // Container(
+                                  //   alignment: Alignment.bottomRight,
+                                  //   child: Column(
+                                  //       mainAxisAlignment:
+                                  //           MainAxisAlignment.end,
+                                  //       children: [
+                                  //         InkWell(
+                                  //           child: const Text(
+                                  //             "View as Chart",
+                                  //             style: TextStyle(
+                                  //               fontFamily: 'ProximaNova',
+                                  //               fontSize: 13,
+                                  //               color: Color(0xFF0047B2),
+                                  //               decoration:
+                                  //                   TextDecoration.underline,
+                                  //             ),
+                                  //           ),
+                                  //           onTap: () => print("View as Chart"),
+                                  //         ),
+                                  //       ]),
+                                  // ),
                                 ]),
                               ),
                               Divider(
@@ -348,72 +348,72 @@ class DashboardScreenState extends State<DashboardScreen> {
                             padding: EdgeInsets.only(left: 20, right: 20),
                             child: Column(
                               children: [
-                                Container(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      InkWell(
-                                          child: Container(
-                                              padding: EdgeInsets.only(
-                                                  left: 10,
-                                                  right: 10,
-                                                  top: 8,
-                                                  bottom: 8),
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: Color(0xFF0047B2),
-                                                  width: 1,
-                                                  style: BorderStyle.solid,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                              ),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    "Caste/Vote Favor",
-                                                    style: TextStyle(
-                                                        color:
-                                                            Color(0xFFAEAEAE),
-                                                        fontFamily:
-                                                            "ProximaNova",
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  Image.asset(
-                                                      Images.expansionTileIcon)
-                                                ],
-                                              ))),
-                                      Container(
-                                        //margin: const EdgeInsets.only(left: 100, right: 100, bottom: 20, top: 30),
-                                        child: BlueButton(
-                                          buttonText: 'Filter',
-                                          width: 80,
-                                          height: 38,
-                                          radius: 5,
-                                          onTap: () => print('Filter'),
-                                              // Navigator.push(
-                                              // context,
-                                              // MaterialPageRoute(
-                                              //     builder: (_) =>
-                                              //         const DashboardScreen())),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                // Container(
+                                //   child: Row(
+                                //     mainAxisAlignment:
+                                //         MainAxisAlignment.spaceBetween,
+                                //     children: [
+                                //       InkWell(
+                                //           child: Container(
+                                //               padding: EdgeInsets.only(
+                                //                   left: 10,
+                                //                   right: 10,
+                                //                   top: 8,
+                                //                   bottom: 8),
+                                //               decoration: BoxDecoration(
+                                //                 border: Border.all(
+                                //                   color: Color(0xFF0047B2),
+                                //                   width: 1,
+                                //                   style: BorderStyle.solid,
+                                //                 ),
+                                //                 borderRadius:
+                                //                     BorderRadius.circular(5),
+                                //               ),
+                                //               child: Row(
+                                //                 mainAxisAlignment:
+                                //                     MainAxisAlignment
+                                //                         .spaceBetween,
+                                //                 children: [
+                                //                   Text(
+                                //                     "Caste/Vote Favor",
+                                //                     style: TextStyle(
+                                //                         color:
+                                //                             Color(0xFFAEAEAE),
+                                //                         fontFamily:
+                                //                             "ProximaNova",
+                                //                         fontSize: 16,
+                                //                         fontWeight:
+                                //                             FontWeight.w500),
+                                //                   ),
+                                //                   SizedBox(
+                                //                     width: 5,
+                                //                   ),
+                                //                   Image.asset(
+                                //                       Images.expansionTileIcon)
+                                //                 ],
+                                //               ))),
+                                //       Container(
+                                //         //margin: const EdgeInsets.only(left: 100, right: 100, bottom: 20, top: 30),
+                                //         child: BlueButton(
+                                //           buttonText: 'Filter',
+                                //           width: 80,
+                                //           height: 38,
+                                //           radius: 5,
+                                //           onTap: () => print('Filter'),
+                                //               // Navigator.push(
+                                //               // context,
+                                //               // MaterialPageRoute(
+                                //               //     builder: (_) =>
+                                //               //         const DashboardScreen())),
+                                //         ),
+                                //       ),
+                                //     ],
+                                //   ),
+                                // ),
                                 Container(
                                   padding: EdgeInsets.only(top: 10, bottom: 5),
                                   child: Text(
-                                    "Search appears based on filters",
+                                    "Chart appears based on above filters",
                                     style: titleSemiMedium,
                                   ),
                                   alignment: Alignment.bottomLeft,
@@ -580,15 +580,22 @@ class DashboardPopupWidget extends StatelessWidget {
               ),
             ],
           );
-        } else if (type == DashboardPopupType.mandal) {
+        }
+        else if (type == DashboardPopupType.mandal) {
           List<MandalModel> segredatedMandalList = [];
-          for (var constituency in state.selectedConstituencies) {
-            if (state.dropdownDetails.mandal?.isNotEmpty ?? false) {
-              for (var mandal in state.dropdownDetails.mandal!) {
-                if (mandal.constituency_id == constituency.constituency_id) {
-                  segredatedMandalList.add(mandal);
-                }
-              }
+          // for (var constituency in state.selectedConstituencies) {
+          //   if (state.dropdownDetails.mandal?.isNotEmpty ?? false) {
+          //     for (var mandal in state.dropdownDetails.mandal!) {
+          //       if (mandal.constituency_id == constituency.constituency_id) {
+          //         segredatedMandalList.add(mandal);
+          //       }
+          //     }
+          //   }
+          // }
+
+          if (state.dropdownDetails.mandal?.isNotEmpty ?? false) {
+            for (var mandal in state.dropdownDetails.mandal!) {
+              segredatedMandalList.add(mandal);
             }
           }
           return Column(
@@ -608,6 +615,8 @@ class DashboardPopupWidget extends StatelessWidget {
                   itemCount: segredatedMandalList.length,
                   itemBuilder: (context, index) {
                     MandalModel? mandalDetails = segredatedMandalList[index];
+                    //state.selectedMandal.map((e) => print(e.mandal_name));
+                    print(state.selectedMandal.length);
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -620,11 +629,11 @@ class DashboardPopupWidget extends StatelessWidget {
                         ),
                         Checkbox(
                           activeColor: const Color(0xFF046A38),
-                          value: state.selectedMandal.contains(mandalDetails),
+                          value: state.selectedMandal.map((item) => item.mandal_id).contains(mandalDetails.mandal_id),
                           onChanged: (v) {
                             BlocProvider.of<DashboardCubit>(context)
                                 .updateSelectedMandals(
-                              state.dropdownDetails.mandal![index],
+                              segredatedMandalList[index],
                               v ?? false,
                             );
                           },
@@ -636,15 +645,21 @@ class DashboardPopupWidget extends StatelessWidget {
               ),
             ],
           );
-        } else if (type == DashboardPopupType.village) {
+        }
+        else if (type == DashboardPopupType.village) {
           List<VillageModal> segredatedVillageList = [];
-          for (var mandal in state.selectedMandal) {
-            if (state.dropdownDetails.villages?.isNotEmpty ?? false) {
-              for (var village in state.dropdownDetails.villages!) {
-                if (mandal.mandal_id == village.mandal_id) {
-                  segredatedVillageList.add(village);
-                }
-              }
+          // for (var mandal in state.selectedMandal) {
+          //   if (state.dropdownDetails.villages?.isNotEmpty ?? false) {
+          //     for (var village in state.dropdownDetails.villages!) {
+          //       if (mandal.mandal_id == village.mandal_id) {
+          //         segredatedVillageList.add(village);
+          //       }
+          //     }
+          //   }
+          // }
+          if (state.dropdownDetails.villages?.isNotEmpty ?? false) {
+            for (var village in state.dropdownDetails.villages!) {
+                segredatedVillageList.add(village);
             }
           }
           return Column(
@@ -676,8 +691,7 @@ class DashboardPopupWidget extends StatelessWidget {
                         ),
                         Checkbox(
                           activeColor: const Color(0xFF046A38),
-                          value:
-                              state.selectedVillages.contains(villageDetails),
+                          value:state.selectedVillages.map((item) => item.ward_village_id).contains(villageDetails.ward_village_id),
                           onChanged: (v) {
                             BlocProvider.of<DashboardCubit>(context)
                                 .updateSelectedVillages(
@@ -693,15 +707,22 @@ class DashboardPopupWidget extends StatelessWidget {
               ),
             ],
           );
-        } else if (type == DashboardPopupType.polling) {
+        }
+        else if (type == DashboardPopupType.polling) {
           List<PollingModel> segredatedPollingList = [];
-          for (var village in state.selectedVillages) {
-            if (state.dropdownDetails.polling?.isNotEmpty ?? false) {
-              for (var polling in state.dropdownDetails.polling!) {
-                if (polling.ward_village_id == village.ward_village_id) {
-                  segredatedPollingList.add(polling);
-                }
-              }
+          // for (var village in state.selectedVillages) {
+          //   if (state.dropdownDetails.polling?.isNotEmpty ?? false) {
+          //     for (var polling in state.dropdownDetails.polling!) {
+          //       segredatedPollingList.add(polling);
+          //       // if (polling.ward_village_id == village.ward_village_id) {
+          //       //   segredatedPollingList.add(polling);
+          //       // }
+          //     }
+          //   }
+          // }
+          if (state.dropdownDetails.polling?.isNotEmpty ?? false) {
+            for (var polling in state.dropdownDetails.polling!) {
+              segredatedPollingList.add(polling);
             }
           }
           return Column(
@@ -733,8 +754,8 @@ class DashboardPopupWidget extends StatelessWidget {
                         ),
                         Checkbox(
                           activeColor: const Color(0xFF046A38),
-                          value:
-                              state.selectedPollings.contains(pollingDetails),
+                          value: state.selectedPollings.map((item) => item.polling_booth_id).contains(pollingDetails.polling_booth_id),
+                              //state.selectedPollings.contains(pollingDetails),
                           onChanged: (v) {
                             BlocProvider.of<DashboardCubit>(context)
                                 .updateSelectedPolling(

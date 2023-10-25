@@ -20,7 +20,7 @@ class _VoterDataFilterViewState extends State<VoterDataFilterView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Filters'),
+        title: const Text('Filters'),
       ),
       body: BlocConsumer<VotersDataCubit, VotersDataState>(
         listener: (context, state) {
@@ -78,7 +78,7 @@ class _VoterDataFilterViewState extends State<VoterDataFilterView> {
                   height: 20,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () { Navigator.pop(context, 'refresh'); },
                   child: Container(
                     height: 40.0,
                     width: 100.0,
@@ -133,7 +133,7 @@ class VoterDataFilterWidgetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return Column(children: [Expanded(
       child: GestureDetector(
         onTap: () => voterDataFilterPopupDialog(context: context, type: type),
         child: Container(
@@ -167,7 +167,7 @@ class VoterDataFilterWidgetWidget extends StatelessWidget {
           ),
         ),
       ),
-    );
+    )],);
   }
 }
 
@@ -234,6 +234,7 @@ class DashboardPopupWidget extends StatelessWidget {
             ],
           );
         } else if (type == DashboardPopupType.mandal) {
+
           List<MandalModel> segredatedMandalList = [];
           for (var constituency in state.selectedConstituencies) {
             if (state.dropdownDetails.mandal?.isNotEmpty ?? false) {
@@ -273,7 +274,7 @@ class DashboardPopupWidget extends StatelessWidget {
                         ),
                         Checkbox(
                           activeColor: const Color(0xFF046A38),
-                          value: state.selectedMandal.contains(mandalDetails),
+                          value: state.selectedMandal.map((item) => item.mandal_id).contains(mandalDetails.mandal_id),
                           onChanged: (v) {
                             BlocProvider.of<VotersDataCubit>(context)
                                 .updateSelectedMandals(
@@ -291,13 +292,18 @@ class DashboardPopupWidget extends StatelessWidget {
           );
         } else if (type == DashboardPopupType.village) {
           List<VillageModal> segredatedVillageList = [];
-          for (var mandal in state.selectedMandal) {
-            if (state.dropdownDetails.villages?.isNotEmpty ?? false) {
-              for (var village in state.dropdownDetails.villages!) {
-                if (mandal.mandal_id == village.mandal_id) {
-                  segredatedVillageList.add(village);
-                }
-              }
+          // for (var mandal in state.selectedMandal) {
+          //   if (state.dropdownDetails.villages?.isNotEmpty ?? false) {
+          //     for (var village in state.dropdownDetails.villages!) {
+          //       if (mandal.mandal_id == village.mandal_id) {
+          //         segredatedVillageList.add(village);
+          //       }
+          //     }
+          //   }
+          // }
+          if (state.dropdownDetails.villages?.isNotEmpty ?? false) {
+            for (var village in state.dropdownDetails.villages!) {
+              segredatedVillageList.add(village);
             }
           }
           return Column(
@@ -330,7 +336,7 @@ class DashboardPopupWidget extends StatelessWidget {
                         Checkbox(
                           activeColor: const Color(0xFF046A38),
                           value:
-                              state.selectedVillages.contains(villageDetails),
+                          state.selectedVillages.map((item) => item.ward_village_id).contains(villageDetails.ward_village_id),
                           onChanged: (v) {
                             BlocProvider.of<VotersDataCubit>(context)
                                 .updateSelectedVillages(
@@ -348,13 +354,19 @@ class DashboardPopupWidget extends StatelessWidget {
           );
         } else if (type == DashboardPopupType.polling) {
           List<PollingModel> segredatedPollingList = [];
-          for (var village in state.selectedVillages) {
-            if (state.dropdownDetails.polling?.isNotEmpty ?? false) {
-              for (var polling in state.dropdownDetails.polling!) {
-                if (polling.ward_village_id == village.ward_village_id) {
-                  segredatedPollingList.add(polling);
-                }
-              }
+          // for (var village in state.selectedVillages) {
+          //   if (state.dropdownDetails.polling?.isNotEmpty ?? false) {
+          //     for (var polling in state.dropdownDetails.polling!) {
+          //       segredatedPollingList.add(polling);
+          //       // if (polling.ward_village_id == village.ward_village_id) {
+          //       //   segredatedPollingList.add(polling);
+          //       // }
+          //     }
+          //   }
+          // }
+          if (state.dropdownDetails.polling?.isNotEmpty ?? false) {
+            for (var polling in state.dropdownDetails.polling!) {
+              segredatedPollingList.add(polling);
             }
           }
           return Column(
@@ -387,7 +399,7 @@ class DashboardPopupWidget extends StatelessWidget {
                         Checkbox(
                           activeColor: const Color(0xFF046A38),
                           value:
-                              state.selectedPollings.contains(pollingDetails),
+                          state.selectedPollings.map((item) => item.polling_booth_id).contains(pollingDetails.polling_booth_id),
                           onChanged: (v) {
                             BlocProvider.of<VotersDataCubit>(context)
                                 .updateSelectedPolling(

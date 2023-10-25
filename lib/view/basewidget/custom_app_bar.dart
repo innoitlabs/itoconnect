@@ -28,16 +28,19 @@ class CustomAppBar extends StatelessWidget {
         alignment: Alignment.center,
         child: Row(
           children: [
-            Align(
+            const Align(
               alignment: Alignment.centerLeft,
-              child: IconButton(
-                icon: const Icon(
-                  Icons.menu,
-                  color: Colors.grey,
-                  size: 32,
-                ),
-                onPressed: () {},
+              child: SizedBox(
+                width: 32,
               ),
+              // IconButton(
+              //   icon: const Icon(
+              //     Icons.menu,
+              //     color: Colors.grey,
+              //     size: 32,
+              //   ),
+              //   onPressed: () {},
+              // ),
             ),
             Align(
               alignment: Alignment.topRight,
